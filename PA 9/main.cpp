@@ -22,6 +22,8 @@
 ********************************************************************************************/
 
 #include "raylib.h"
+#include "Entity.hpp"
+#include <vector>
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -32,6 +34,8 @@ int main(void)
     //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
     const int screenHeight = 450;
+
+    std::vector<Entity*> entities = {};
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
@@ -46,9 +50,18 @@ int main(void)
         // TODO: Update your variables here
         //----------------------------------------------------------------------------------
 
+        for (const auto& e : entities) {
+            e->update();
+            e->handleCollision(nullptr);
+        }
+
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
+
+        for (const auto& e : entities) {
+            e->draw();
+        }
 
         ClearBackground(RAYWHITE);
 
