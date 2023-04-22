@@ -29,5 +29,15 @@ public:
 
 	}
 
+	int getDeaths() {
+		return this->deaths;
+	}
+
+	void incrementDeaths() {
+		this->deaths += 1;
+	}
+
+private:
+	int deaths = 0;
 
 };
