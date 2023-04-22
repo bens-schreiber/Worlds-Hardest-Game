@@ -2,11 +2,17 @@
 #include "raylib.h"
 #include "const.h"
 #include "Entity.hpp"
+#include "Player.hpp"
+#include "EnemyBall.hpp"
 #include <vector>
 
 int main(void)
 {
-    std::vector<Entity*> entities = {};
+    Player* p = new Player();
+    std::vector<Entity*> entities = {
+        p, 
+        new EnemyBall({screenWidth / 2, screenHeight / 2}, {5,5})
+    };
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 

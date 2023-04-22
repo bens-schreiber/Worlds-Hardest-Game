@@ -130,6 +130,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyBall.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerCollidable.hpp" />

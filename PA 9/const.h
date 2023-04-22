@@ -6,3 +6,5 @@
 #define playerSpeed 8
 #define playerDimensions 50
 #define playerBorderSize 10
+#define radius 30
+#define radiusOutline 45
