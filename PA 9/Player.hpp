@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 #include "Entity.hpp"
-#include "const.h"
+#include "consts.hpp"
 
 // Main player of the game. Moveable via WASD keys.
 class Player : public Entity {

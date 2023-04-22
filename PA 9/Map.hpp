@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerCollidable.hpp"
-#include "const.h"
+#include "consts.hpp"
 #include <vector>
 #include "raylib.h"
 

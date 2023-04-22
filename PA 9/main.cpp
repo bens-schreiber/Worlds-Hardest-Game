@@ -1,6 +1,6 @@
 
 #include "raylib.h"
-#include "const.h"
+#include "consts.hpp"
 #include "Entity.hpp"
 #include "Player.hpp"
 #include "LinearBall.hpp"
@@ -16,13 +16,15 @@ int main(void)
 
     // Create a player entity to be the main controllable actor of the game.
     // The player is dependency injected into the PlayerCollideable interface
-    Player* p = new Player();
-    PlayerCollidable::setPlayer(p);
+    Player p;
+    PlayerCollidable::setPlayer(&p);
 
     // List of all drawable and updateable entities 
     std::vector<Entity*> entities = {
-        p, 
-        new LinearBall({ screenWidth / 2, screenHeight / 2}, {5,5})
+        &p,
+        new LinearBall({ screenWidth / 2, screenHeight / 2}, {0,-5}),
+        new LinearBall({ screenWidth / 3, screenHeight / 2}, {0,5}),
+        new LinearBall({ screenWidth / 4, screenHeight / 2}, {0,-5}),
     };
 
     while (!WindowShouldClose())   

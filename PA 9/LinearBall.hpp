@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entity.hpp"
-#include "const.h"
+#include "consts.hpp"
 #include "raylib.h"
 #include "PlayerCollidable.hpp"
 

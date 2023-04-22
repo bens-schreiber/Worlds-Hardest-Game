@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.hpp"
-#include <assert.h>
 
 // Interface for dealing with player collisions
 // Any class that implements PlayerCollidable will be able to collide with the player, and
