@@ -56,6 +56,10 @@ public:
 		m_position = m_spawnpoint;
 	}
 
+	void setSpawnPoint(Vector2 spawnpoint) {
+		m_spawnpoint = spawnpoint;
+	}
+
 	// Return the player rectangle for collison calculations
 	const Rectangle& getRectangle() const {
 		return m_rectangle;

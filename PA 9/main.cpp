@@ -5,10 +5,12 @@
 #include "Player.hpp"
 #include "LinearBall.hpp"
 #include "Map.hpp"
+#include "MapFactory.hpp"
 #include <vector>
 
 int main(void)
 {
+
     // Initial window size
     InitWindow(screenWidth, screenHeight, "Worlds Hardest Game - PA9 WSU");
 
@@ -20,9 +22,13 @@ int main(void)
     Player p;
     PlayerCollidable::setPlayer(&p);
 
+    Map m = MapFactory().mapFromFile();
+
+    p.setSpawnPoint(m.getSpawnpoint());
+
     // List of all drawable and updateable entities 
     std::vector<FrameListenable*> frameListenables = {
-        new Map(),
+        &m,
         &p,
         new LinearBall({ screenWidth / 2, screenHeight / 2}, {0,-5}),
         new LinearBall({ screenWidth / 3, screenHeight / 2}, {0,5}),
