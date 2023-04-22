@@ -12,3 +12,6 @@
 // balls
 #define radius 30.0f
 #define radiusOutline 45.0f
+
+// interface
+#define barHeight screenHeight/12
