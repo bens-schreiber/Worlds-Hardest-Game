@@ -1,10 +1,8 @@
 ﻿  main.cpp
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\Player.hpp(13,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\Player.hpp(13,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\Player.hpp(14,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\Player.hpp(14,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(16,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(16,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(17,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\BenjaminSchreiber\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(17,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  PA 9.vcxproj -> C:\Users\BenjaminSchreiber\Source\Repos\wsu-pa9\x64\Debug\PA 9.exe
+C:\Users\kenda\source\repos\wsu-pa9\PA 9\Player.hpp(13,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\kenda\source\repos\wsu-pa9\PA 9\Player.hpp(13,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\kenda\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(16,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\kenda\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(16,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\kenda\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(17,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\kenda\source\repos\wsu-pa9\PA 9\EnemyBall.hpp(17,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  PA 9.vcxproj -> C:\Users\kenda\Source\Repos\wsu-pa9\x64\Debug\PA 9.exe

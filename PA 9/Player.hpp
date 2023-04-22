@@ -7,11 +7,14 @@
 class Player : public Entity {
 
 public:
-	Player(): Entity({0,0},{playerSpeed,playerSpeed}) {}
+	Player(): Entity({0,0},{playerSpeed,playerSpeed}),m_rectangle({0,0}) {}
 
 	void draw() {
 		DrawRectangle(this->m_position.x - (playerBorderSize/2), this->m_position.y - (playerBorderSize / 2), playerDimensions + playerBorderSize, playerDimensions + playerBorderSize, BLACK);
-		DrawRectangle(this->m_position.x, this->m_position.y, playerDimensions, playerDimensions, RED);
+		m_rectangle.x = m_position.x;
+		m_rectangle.y = m_position.y;
+		m_rectangle.height = m_rectangle.width = playerDimensions;
+		DrawRectangleRec(this->m_rectangle, RED);
 	}
 
 
@@ -25,8 +28,13 @@ public:
 		// avoid going outside of bounds of map
 	}
 
-	void handleCollision(Entity* entity) {
+	void resetPosition() {
+		this->m_position = { 0,0 };
+	}
 
+	Rectangle& getRectangle()
+	{
+		return m_rectangle;
 	}
 
 	int getDeaths() {
@@ -39,5 +47,5 @@ public:
 
 private:
 	int deaths = 0;
-
+	Rectangle m_rectangle;
 };

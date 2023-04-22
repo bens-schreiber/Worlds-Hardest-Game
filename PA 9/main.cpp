@@ -11,7 +11,7 @@ int main(void)
     Player* p = new Player();
     std::vector<Entity*> entities = {
         p, 
-        new EnemyBall({screenWidth / 2, screenHeight / 2}, {5,5})
+        new EnemyBall(p, { screenWidth / 2, screenHeight / 2}, {5,5})
     };
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
@@ -23,7 +23,6 @@ int main(void)
 
         for (const auto& e : entities) {
             e->update();
-            e->handleCollision(nullptr);
         }
 
         BeginDrawing();

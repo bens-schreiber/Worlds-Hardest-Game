@@ -3,14 +3,14 @@
 #include "Entity.hpp"
 #include "const.h"
 #include "raylib.h"
+#include "PlayerCollidable.hpp"
 
-class EnemyBall : public Entity
+class EnemyBall : public Entity, public PlayerCollidable
 {
 public:
 
-	EnemyBall(Vector2 position, Vector2 velocity) : Entity(position, velocity)
-	{
-	}
+	EnemyBall(Player* player, Vector2 position, Vector2 velocity) : Entity(position, velocity), PlayerCollidable(player)
+	{}
 
 	void draw() {
 		DrawCircle(m_position.x, m_position.y, radius, BLACK);
@@ -26,7 +26,12 @@ public:
 		{
 			m_velocity.x *= -1;
 		}
-
+		handleCollision();
 	}
-	void handleCollision(Entity* entity) {}
+	void handleCollision() {
+		if (CheckCollisionCircleRec(m_position, radius, m_player->getRectangle()))
+		{
+			m_player->resetPosition();
+		}
+	}
 };

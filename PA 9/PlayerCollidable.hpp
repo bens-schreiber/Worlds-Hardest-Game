@@ -7,6 +7,6 @@ public:
 
 	virtual void handleCollision() = 0;
 
-private:
+protected:
 	Player* m_player;
 };
