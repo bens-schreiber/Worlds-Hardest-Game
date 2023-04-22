@@ -10,10 +10,10 @@ class Player : public Entity {
 	int m_deaths = 0;
 	Vector2 m_spawnpoint;
 	Rectangle m_rectangle;
-	bool out_of_bounds_R = false;
-	bool out_of_bounds_L = false;
-	bool out_of_bounds_Up = false;
-	bool out_of_bounds_Down = false;
+	bool m_outOfBoundsR = false;
+	bool m_outOfBoundsL = false;
+	bool m_outOfBoundsUp = false;
+	bool m_outOfBoundsDown = false;
 
 public:
 
@@ -46,10 +46,10 @@ public:
 
 		// CONTROLS
 
-		if (IsKeyDown(KEY_D) && !out_of_bounds_R) m_position.x += m_velocity.x;
-		if (IsKeyDown(KEY_A) && !out_of_bounds_L) m_position.x -= m_velocity.x;
-		if (IsKeyDown(KEY_W) && !out_of_bounds_Up) m_position.y -= m_velocity.y;
-		if (IsKeyDown(KEY_S) && !out_of_bounds_Down) m_position.y += m_velocity.y;
+		if (IsKeyDown(KEY_D) && !m_outOfBoundsR) m_position.x += m_velocity.x;
+		if (IsKeyDown(KEY_A) && !m_outOfBoundsL) m_position.x -= m_velocity.x;
+		if (IsKeyDown(KEY_W) && !m_outOfBoundsUp) m_position.y -= m_velocity.y;
+		if (IsKeyDown(KEY_S) && !m_outOfBoundsDown) m_position.y += m_velocity.y;
 
 		// Set the player rectangle position
 		m_rectangle.x = m_position.x;
@@ -59,11 +59,11 @@ public:
 	void setOut_of_bounds_R(bool tf) {
 		if (tf == true)
 		{
-			this->out_of_bounds_R = true;
+			this->m_outOfBoundsR = true;
 		}
 		if (tf == false)
 		{
-			this->out_of_bounds_R = false;
+			this->m_outOfBoundsR = false;
 		}
 	}
 
@@ -71,33 +71,33 @@ public:
 	void setOut_of_bounds_L(bool tf) {
 		if (tf == true)
 		{
-			this->out_of_bounds_L = true;
+			this->m_outOfBoundsL = true;
 		}
 		if (tf == false)
 		{
-			this->out_of_bounds_L = false;
+			this->m_outOfBoundsL = false;
 		}
 	}
 
 	void setOut_of_bounds_Up(bool tf) {
 		if (tf == true)
 		{
-			this->out_of_bounds_Up = true;
+			this->m_outOfBoundsUp = true;
 		}
 		if (tf == false)
 		{
-			this->out_of_bounds_Up = false;
+			this->m_outOfBoundsUp = false;
 		}
 	}
 
 	void setOut_of_bounds_Down(bool tf) {
 		if (tf == true)
 		{
-			this->out_of_bounds_Down = true;
+			this->m_outOfBoundsDown = true;
 		}
 		if (tf == false)
 		{
-			this->out_of_bounds_Down = false;
+			this->m_outOfBoundsDown = false;
 		}
 	}
 
