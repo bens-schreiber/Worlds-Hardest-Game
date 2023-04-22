@@ -4,6 +4,7 @@
 #include "Entity.hpp"
 #include "Player.hpp"
 #include "LinearBall.hpp"
+#include "Map.hpp"
 #include <vector>
 
 int main(void)
@@ -20,7 +21,8 @@ int main(void)
     PlayerCollidable::setPlayer(&p);
 
     // List of all drawable and updateable entities 
-    std::vector<Entity*> entities = {
+    std::vector<FrameListenable*> frameListenables = {
+        new Map(),
         &p,
         new LinearBall({ screenWidth / 2, screenHeight / 2}, {0,-5}),
         new LinearBall({ screenWidth / 3, screenHeight / 2}, {0,5}),
@@ -31,15 +33,15 @@ int main(void)
     {
 
         // Update all entities each frame
-        for (const auto& e : entities) {
-            e->update();
+        for (const auto& i : frameListenables) {
+            i->update();
         }
 
         BeginDrawing();
         
         // Draw all entities each frame
-        for (const auto& e : entities) {
-            e->draw();
+        for (const auto& i : frameListenables) {
+            i->draw();
         }
 
         ClearBackground(RAYWHITE);

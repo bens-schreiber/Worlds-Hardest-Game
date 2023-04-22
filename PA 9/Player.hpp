@@ -8,6 +8,7 @@
 class Player : public Entity {
 
 	int m_deaths = 0;
+	Vector2 m_spawnpoint;
 	Rectangle m_rectangle;
 
 public:
@@ -16,9 +17,10 @@ public:
 	// X,Y velocity: playerSpeed
 	// Rectangle: playerDimensions x playerDimensions
 	Player() : Entity(
-		{0,0},
-		{playerSpeed,playerSpeed}), 
-		m_rectangle({0,0, playerDimensions, playerDimensions})
+		{ screenWidth / 2,screenHeight / 2 },
+		{ playerSpeed,playerSpeed }),
+		m_rectangle({ 0,0, playerDimensions, playerDimensions }),
+		m_spawnpoint({ screenWidth / 2,screenHeight / 2 })
 	{}
 
 	void draw() {
@@ -51,7 +53,7 @@ public:
 
 	// Bring the player back to the spawnpoint
 	void resetPosition() {
-		m_position = { 0,0 };
+		m_position = m_spawnpoint;
 	}
 
 	// Return the player rectangle for collison calculations

@@ -1,9 +1,9 @@
 #pragma once
 #include "raylib.h"
+#include "FrameListenable.hpp"
 
-// Base most class for all drawable and updateable things.
-// Provides an interface to interact with the main raylib frame by frame loop
-class Entity {
+// Entities are objects that have some physics/movement to be acted upon each frame
+class Entity : public FrameListenable {
 protected:
 
 	// Position: X,Y
@@ -20,12 +20,4 @@ protected:
 		Vector2 velocity = { 0,0 },
 		Vector2 acceleration = { 0,0 }) : m_position(position), m_velocity(velocity), m_acceleration(acceleration) 
 	{}
-
-public:
-
-	// Called every frame after update
-	virtual void draw() = 0;
-
-	// Called every frame
-	virtual void update() = 0;
 };

@@ -131,6 +131,7 @@
     <ClCompile Include="PlayerCollidable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
     <ClInclude Include="LinearBall.hpp" />
     <ClInclude Include="Entity.hpp" />
