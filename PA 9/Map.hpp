@@ -18,14 +18,30 @@ public:
 
 		bool colliding = false;
 		for (const auto& i : m_components) {
-			if (CheckCollisionRecs(i, player().getRectangle())) {
-				colliding = true;
-				break;
-			}
-		}
+			bool tf = false;
+			player().setOut_of_bounds_R(tf);
+			player().setOut_of_bounds_L(tf);
+			player().setOut_of_bounds_Up(tf);
+			player().setOut_of_bounds_Down(tf);
+			tf = true;
 
-		if (colliding) return;
-		player().resetPosition();
+				if ((i.width + i.x) - player().getRectangle().width - playerBorderSize <= player().getRectangle().x)
+				{
+					player().setOut_of_bounds_R(tf);
+				}
+				if (i.x + playerBorderSize >= player().getRectangle().x)
+				{
+					player().setOut_of_bounds_L(tf);
+				}
+				if ((i.height + i.y) - player().getRectangle().height - playerBorderSize <= player().getRectangle().y)
+				{
+					player().setOut_of_bounds_Down(tf);
+				}
+				if (i.y + playerBorderSize >= player().getRectangle().y)
+				{
+					player().setOut_of_bounds_Up(tf);
+				}
+		}
 	}
 	
 	void draw() {
