@@ -8,25 +8,34 @@
 
 int main(void)
 {
+
+
+    // Initial window size
+    InitWindow(screenWidth, screenHeight, "Worlds Hardest Game - PA9 WSU");
+
+    // Set our game to run at 60 frames-per-second
+    SetTargetFPS(60);
+
+    // Create a player entity to be the main controllable actor of the game
     Player* p = new Player();
+
+    // List of all drawable and updateable entities 
     std::vector<Entity*> entities = {
         p, 
         new EnemyBall(p, { screenWidth / 2, screenHeight / 2}, {5,5})
     };
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-
     while (!WindowShouldClose())   
     {
 
+        // Update all entities each frame
         for (const auto& e : entities) {
             e->update();
         }
 
         BeginDrawing();
-
+        
+        // Draw all entities each frame
         for (const auto& e : entities) {
             e->draw();
         }
