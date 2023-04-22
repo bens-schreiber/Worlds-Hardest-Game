@@ -5,18 +5,25 @@
 #include "raylib.h"
 #include "PlayerCollidable.hpp"
 
-class EnemyBall : public Entity, public PlayerCollidable
+// Ball capable of moving linearly along the X or Y
+class LinearBall : public Entity, public PlayerCollidable
 {
 public:
 
-	EnemyBall(Player* player, Vector2 position, Vector2 velocity) : Entity(position, velocity), PlayerCollidable(player)
+	LinearBall(Vector2 position, Vector2 velocity) : Entity(position, velocity), PlayerCollidable()
 	{}
 
 	void draw() {
+
+		// BACKGROUND
 		DrawCircle(m_position.x, m_position.y, radius, BLACK);
+
+		// BALL
 		DrawCircle(m_position.x, m_position.y, radius - 7, DARKBLUE);
 	}
 	void update() {
+
+		// Increment the ball position in respect to its velocity
 		m_position.x += m_velocity.x;
 		m_position.y += m_velocity.y;
 
@@ -39,9 +46,9 @@ public:
 		handleCollision();
 	}
 	void handleCollision() {
-		if (CheckCollisionCircleRec(m_position, radius, m_player->getRectangle()))
+		if (CheckCollisionCircleRec(m_position, radius, player().getRectangle()))
 		{
-			m_player->resetPosition();
+			player().resetPosition();
 		}
 	}
 };
