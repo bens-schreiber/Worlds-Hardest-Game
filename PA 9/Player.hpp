@@ -10,7 +10,7 @@ public:
 	Player(): Entity({0,0},{playerSpeed,playerSpeed}) {}
 
 	void draw() {
-		DrawRectangle(this->m_position.x-5, this->m_position.y-5, playerDimensions + 10, playerDimensions + 10, BLACK);
+		DrawRectangle(this->m_position.x - (playerBorderSize/2), this->m_position.y - (playerBorderSize / 2), playerDimensions + playerBorderSize, playerDimensions + playerBorderSize, BLACK);
 		DrawRectangle(this->m_position.x, this->m_position.y, playerDimensions, playerDimensions, RED);
 	}
 
