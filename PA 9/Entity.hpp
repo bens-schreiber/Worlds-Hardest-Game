@@ -1,9 +1,18 @@
 #pragma once
 #include "raylib.h"
+
+// Base most class for all drawable and updateable things.
+// Provides an interface to interact with the main raylib frame by frame loop
 class Entity {
 protected:
+
+	// Position: X,Y
 	Vector2 m_position;
+
+	// Velocity: X,Y
 	Vector2 m_velocity;
+
+	// Acceleration: X,Y
 	Vector2 m_acceleration;
 
 	Entity(
@@ -13,7 +22,10 @@ protected:
 	{}
 
 public:
+
+	// Called every frame after update
 	virtual void draw() = 0;
+
+	// Called every frame
 	virtual void update() = 0;
-	virtual void handleCollision(Entity* entity) = 0;
 };
