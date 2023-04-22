@@ -18,6 +18,16 @@ public:
 	}
 	void update() {
 		m_position.x += m_velocity.x;
+		m_position.y += m_velocity.y;
+
+		if (m_position.y >= screenHeight - radius)
+		{
+			m_velocity.y *= -1; // change directions
+		}
+		if (m_position.y <= radius)
+		{
+			m_velocity.y *= -1;
+		}
 		if (m_position.x >= screenWidth - radius)
 		{
 			m_velocity.x *= -1;
