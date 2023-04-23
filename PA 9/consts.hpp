@@ -20,3 +20,7 @@
 #define mapBackground Color { 161, 165, 247, 255}
 #define checkers Color { 197, 200, 248, 255 }
 #define safeSpaces Color {152, 248, 143, 255}
+#define radiusOutline 45.0f
+
+// map
+#define mapComponentWidth 100

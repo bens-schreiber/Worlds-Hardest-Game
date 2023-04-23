@@ -137,8 +137,12 @@
     <ClInclude Include="LinearBall.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Map.hpp" />
+    <ClInclude Include="MapFactory.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerCollidable.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="level1.whgm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -20,4 +20,9 @@ protected:
 		Vector2 velocity = { 0,0 },
 		Vector2 acceleration = { 0,0 }) : m_position(position), m_velocity(velocity), m_acceleration(acceleration) 
 	{}
+
+public:
+	Vector2 getVelocity() {
+		return m_velocity;
+	}
 };

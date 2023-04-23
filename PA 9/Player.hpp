@@ -10,6 +10,10 @@ class Player : public Entity {
 	int m_deaths = 0;
 	Vector2 m_spawnpoint;
 	Rectangle m_rectangle;
+	bool m_outOfBoundsR = false;
+	bool m_outOfBoundsL = false;
+	bool m_outOfBoundsUp = false;
+	bool m_outOfBoundsDown = false;
 
 public:
 
@@ -17,10 +21,10 @@ public:
 	// X,Y velocity: playerSpeed
 	// Rectangle: playerDimensions x playerDimensions
 	Player() : Entity(
-		{ screenWidth / 2,screenHeight / 2 },
+		{ (screenWidth / 2)+1 ,(screenHeight / 2)+1 },
 		{ playerSpeed,playerSpeed }),
-		m_rectangle({ 0,0, playerDimensions, playerDimensions }),
-		m_spawnpoint({ screenWidth / 2,screenHeight / 2 })
+		m_rectangle({ (screenWidth / 2)+1,(screenHeight / 2)+1, playerDimensions, playerDimensions }),
+		m_spawnpoint({ (screenWidth / 2)+1,(screenHeight / 2)+1 })
 	{}
 
 	void draw() {
@@ -41,19 +45,41 @@ public:
 	void update() {
 
 		// CONTROLS
-		if (IsKeyDown(KEY_D)) m_position.x += m_velocity.x;
-		if (IsKeyDown(KEY_A)) m_position.x -= m_velocity.x;
-		if (IsKeyDown(KEY_W)) m_position.y -= m_velocity.y;
-		if (IsKeyDown(KEY_S)) m_position.y += m_velocity.y;
+
+		if (IsKeyDown(KEY_D) && !m_outOfBoundsR) m_position.x += m_velocity.x;
+		if (IsKeyDown(KEY_A) && !m_outOfBoundsL) m_position.x -= m_velocity.x;
+		if (IsKeyDown(KEY_W) && !m_outOfBoundsUp) m_position.y -= m_velocity.y;
+		if (IsKeyDown(KEY_S) && !m_outOfBoundsDown) m_position.y += m_velocity.y;
 
 		// Set the player rectangle position
 		m_rectangle.x = m_position.x;
 		m_rectangle.y = m_position.y;
 	}
 
+	void setOutOfBoundsR(bool tf) {
+		m_outOfBoundsR = tf;
+	}
+
+
+	void setOutOfBoundsL(bool tf) {
+		m_outOfBoundsL = tf;
+	}
+
+	void setOutOfBoundsUp(bool tf) {
+		m_outOfBoundsUp = tf;
+	}
+
+	void setOutOfBoundsDown(bool tf) {
+		m_outOfBoundsDown = tf;
+	}
+
 	// Bring the player back to the spawnpoint
 	void resetPosition() {
 		m_position = m_spawnpoint;
+	}
+
+	void setSpawnPoint(Vector2 spawnpoint) {
+		m_spawnpoint = spawnpoint;
 	}
 
 	// Return the player rectangle for collison calculations
