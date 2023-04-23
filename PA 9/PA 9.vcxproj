@@ -127,8 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EntityDependency.cpp" />
-    <ClCompile Include="EntityDependency.hpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerDependency.cpp" />
   </ItemGroup>

@@ -31,7 +31,7 @@ public:
 	}
 
 	void flipVelocityX() {
-		m_velocity.x *= 1.0f;
+		m_velocity.x *= -1.0f;
 	}
 
 	void flipVelocityY() {

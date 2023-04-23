@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Map">
-      <UniqueIdentifier>{9fa6f7fc-ad18-46e1-8ff1-7a8d9f1b72dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Abstract">
       <UniqueIdentifier>{8e588d93-6e8b-4781-a173-20e07a1d71b7}</UniqueIdentifier>
     </Filter>
@@ -28,19 +25,16 @@
     <Filter Include="Header Files\Dependencies">
       <UniqueIdentifier>{e2c4a2ce-f030-4dc1-a18d-2ee695bf4c6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\FrameListenables\Map">
+      <UniqueIdentifier>{9fa6f7fc-ad18-46e1-8ff1-7a8d9f1b72dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EntityDependency.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerDependency.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityDependency.hpp">
-      <Filter>Header Files\Dependencies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,7 +48,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Map.hpp">
-      <Filter>Header Files\Map</Filter>
+      <Filter>Header Files\FrameListenables\Map</Filter>
     </ClInclude>
     <ClInclude Include="FrameListenable.hpp">
       <Filter>Header Files\Abstract</Filter>
@@ -66,7 +60,7 @@
       <Filter>Header Files\Abstract</Filter>
     </ClInclude>
     <ClInclude Include="MapFactory.hpp">
-      <Filter>Header Files\Map</Filter>
+      <Filter>Header Files\FrameListenables\Map</Filter>
     </ClInclude>
     <ClInclude Include="EntityCollidable.hpp">
       <Filter>Header Files\Abstract</Filter>

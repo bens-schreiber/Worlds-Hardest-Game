@@ -9,7 +9,7 @@
 #include "Map.hpp"
 
 // Factory class dedicated to making Map objects
-class MapFactory : EntityDependency {
+class MapFactory  {
 
 	// List of frame listenables that the map can add to
 	std::vector<FrameListenable*>& m_frameListenables;
@@ -37,14 +37,12 @@ class MapFactory : EntityDependency {
 	// Add the ball to the frame listenables and the entity collision list
 	void createXBall() {
 		auto b = new LinearBall(m_position, { 5, 0 });
-		addEntity(b);
 		m_frameListenables.push_back(b);
 	}
 
 	// Add the ball to the frame listenables and the entity collision list
 	void createYBall() {
 		auto b = new LinearBall(m_position, { 0, 5 });
-		addEntity(b);
 		m_frameListenables.push_back(b);
 	}
 
