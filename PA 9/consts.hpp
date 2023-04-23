@@ -5,7 +5,7 @@
 #define screenHeight 800
 
 // player
-#define playerSpeed 8.0f
+#define playerSpeed 2.5f
 #define playerDimensions 25.0f
 #define playerBorderSize 10.0f
 

@@ -13,19 +13,24 @@ class MapFactory {
 	bool m_altColors = false;
 
 	// checkered square
-	MapComponent basicMapRectangle() {
+	MapComponent basicMapComponent() {
 		MapComponent c = { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions},  m_altColors ? mapCheckerColor : RAYWHITE };
-		m_altColors = !m_altColors;
 		return c;
+	}
+
+	MapComponent safeMapComponent() {
+		return { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions}, mapComponentSafeColor };
 	}
 
 	MapComponent createMapComponent(const char& i) {
 		switch (i) {
 		case '@':
 			m_map.m_spawnpoint = m_position;
-			return basicMapRectangle();
+			return safeMapComponent();
 		case '#':
-			return basicMapRectangle();
+			return basicMapComponent();
+		case '$':
+			return safeMapComponent();
 		}
 	}
 
@@ -39,8 +44,11 @@ public:
 		std::string line;
 		while (std::getline(file, line)) {
 			for (const auto& i : line) {
-				m_map.m_components.push_back(createMapComponent(i));
+				if (i != '0') {
+					m_map.m_components.push_back(createMapComponent(i));
+				}
 				m_position.x += mapComponentDimensions;
+				m_altColors = !m_altColors;
 			}
 			m_position.x = 0;
 			m_position.y += mapComponentDimensions;
