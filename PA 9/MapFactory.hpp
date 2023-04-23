@@ -5,25 +5,21 @@
 #include <string>
 #include <map>
 
+// Factory class dedicated to making Map objects
 class MapFactory {
-
-	const std::map<std::string, std::string> charToMapComp = {
-		{"@","a"},
-	};
 
 	Map m_map;
 	Vector2 m_position{ 0,0 };
 	bool m_altColors = false;
 
-public:
-
+	// checkered square
 	MapComponent basicMapRectangle() {
 		MapComponent c = { {m_position.x, m_position.y, mapComponentWidth, mapComponentWidth},  m_altColors ? GRAY : DARKGRAY };
 		m_altColors = !m_altColors;
 		return c;
 	}
 
-	MapComponent createMapComponent(const char &i) {
+	MapComponent createMapComponent(const char& i) {
 		switch (i) {
 		case '@':
 			m_map.m_spawnpoint = m_position;
@@ -33,6 +29,9 @@ public:
 		}
 	}
 
+public:
+
+	// Creates a map from a .whgm file
 	Map mapFromFile() {
 		std::fstream file;
 		file.open("level1.whgm", std::ios::in);
