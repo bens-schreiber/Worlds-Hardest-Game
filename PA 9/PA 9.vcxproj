@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
+    <ClInclude Include="Interface.hpp" />
     <ClInclude Include="LinearBall.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Map.hpp" />

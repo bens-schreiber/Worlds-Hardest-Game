@@ -5,6 +5,7 @@
 #include "Player.hpp"
 #include "LinearBall.hpp"
 #include "Map.hpp"
+#include "Interface.hpp"
 #include "MapFactory.hpp"
 #include <vector>
 
@@ -33,6 +34,7 @@ int main(void)
         new LinearBall({ screenWidth / 2, screenHeight / 2}, {0,-5}),
         new LinearBall({ screenWidth / 3, screenHeight / 2}, {0,5}),
         new LinearBall({ screenWidth / 4, screenHeight / 2}, {0,-5}),
+        new Interface(),
     };
 
     while (!WindowShouldClose())   
@@ -50,7 +52,7 @@ int main(void)
             i->draw();
         }
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(mapBackground);
 
         EndDrawing();
     }

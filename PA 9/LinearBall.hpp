@@ -27,11 +27,11 @@ public:
 		m_position.x += m_velocity.x;
 		m_position.y += m_velocity.y;
 
-		if (m_position.y >= screenHeight - radius)
+		if (m_position.y >= screenHeight - radius - barHeight)
 		{
 			m_velocity.y *= -1; // change directions
 		}
-		if (m_position.y <= radius)
+		if (m_position.y <= radius + barHeight)
 		{
 			m_velocity.y *= -1;
 		}
