@@ -7,7 +7,7 @@
 // Main player of the game. Moveable via WASD keys.
 class Player : public Entity {
 
-	int m_deaths = 0;
+	int m_deaths = -1;
 	Vector2 m_spawnpoint;
 	Rectangle m_rectangle;
 	bool m_outOfBoundsR = false;

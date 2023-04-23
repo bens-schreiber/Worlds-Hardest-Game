@@ -49,6 +49,7 @@ public:
 		if (CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
 		{
 			player().resetPosition();
+			player().incrementDeaths();
 		}
 	}
 };
