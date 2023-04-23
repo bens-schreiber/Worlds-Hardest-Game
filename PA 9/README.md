@@ -6,6 +6,6 @@ $ - safezone
 
 \# - normal block
 
-Y - linear ball on Y axis
+R - linear ball on X axis going right
 
-X - linear ball on X axis
+L - linear ball on X axis going left

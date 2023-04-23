@@ -35,8 +35,14 @@ class MapFactory  {
 	}
 
 	// Add the ball to the frame listenables and the entity collision list
-	void createXBall() {
-		auto b = new LinearBall(m_position, { 5, 0 });
+	void createXBall(bool movingRight) {
+
+		Vector2 velocity = { movingRight ? 5 : -5, 0 };
+		// TODO: don't hardcode ball bounds
+		auto b = new LinearBall(
+			{m_position.x, m_position.y + ballRadius + ballRadiusOutline}, 
+			velocity,
+			{ mapComponentDimensions * 4, mapComponentDimensions * 12 });
 		m_frameListenables.push_back(b);
 	}
 
@@ -56,11 +62,11 @@ class MapFactory  {
 			return basicMapComponent();
 		case '$':
 			return safeMapComponent();
-		case 'X':
-			createXBall();
+		case 'R':
+			createXBall(true);
 			return basicMapComponent();
-		case 'Y':
-			createYBall();
+		case 'L':
+			createXBall(false);
 			return basicMapComponent();
 		default:
 			return basicMapComponent();
@@ -101,9 +107,6 @@ public:
 			// New row, set position to 0
 			m_position.x = 0;
 			m_position.y += mapComponentDimensions;
-
-			// Flip bool for alternating checker pattern
-			m_altColors = !m_altColors;
 		}
 
 		// Close the file
