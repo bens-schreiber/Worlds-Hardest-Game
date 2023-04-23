@@ -43,9 +43,9 @@ public:
 		{
 			m_velocity.x *= -1;
 		}
-		handleCollision();
+		handlePlayerCollision({});
 	}
-	void handleCollision() {
+	void handlePlayerCollision(Rectangle rect) {
 		if (CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
 		{
 			player().resetPosition();

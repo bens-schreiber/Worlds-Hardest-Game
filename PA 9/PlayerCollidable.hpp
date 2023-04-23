@@ -16,7 +16,7 @@ public:
 	}
 
 	// Collide with player logic
-	virtual void handleCollision() = 0;
+	virtual void handlePlayerCollision(Rectangle rect) = 0;
 
 protected:
 	Player& player() { 

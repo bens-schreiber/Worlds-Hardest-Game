@@ -127,12 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EntityCollidable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerCollidable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EntityCollidable.hpp" />
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
+    <ClInclude Include="Game.hpp" />
     <ClInclude Include="Interface.hpp" />
     <ClInclude Include="LinearBall.hpp" />
     <ClInclude Include="Entity.hpp" />
@@ -143,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="level1.whgm" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

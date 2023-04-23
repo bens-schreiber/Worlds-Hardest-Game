@@ -7,15 +7,16 @@
 // Main player of the game. Moveable via WASD keys.
 class Player : public Entity {
 
-	int m_deaths = -1;
+	int m_deaths = 0;
 	Vector2 m_spawnpoint;
 	Rectangle m_rectangle;
-	bool m_outOfBoundsR = false;
-	bool m_outOfBoundsL = false;
-	bool m_outOfBoundsUp = false;
-	bool m_outOfBoundsDown = false;
 
 public:
+
+	bool canMoveRight = true;
+	bool canMoveLeft = true;
+	bool canMoveUp = true;
+	bool canMoveDown = true;
 
 	// Initialize player with spawnpoint (0,0)
 	// X,Y velocity: playerSpeed
@@ -26,6 +27,13 @@ public:
 		m_rectangle({ (screenWidth / 2)+1,(screenHeight / 2)+1, playerDimensions, playerDimensions }),
 		m_spawnpoint({ (screenWidth / 2)+1,(screenHeight / 2)+1 })
 	{}
+
+	void resetMovement() {
+		canMoveRight = false;
+		canMoveLeft = false;
+		canMoveUp = false;
+		canMoveDown = false;
+	}
 
 	void draw() {
 
@@ -46,31 +54,14 @@ public:
 
 		// CONTROLS
 
-		if (IsKeyDown(KEY_D) && !m_outOfBoundsR) m_position.x += m_velocity.x;
-		if (IsKeyDown(KEY_A) && !m_outOfBoundsL) m_position.x -= m_velocity.x;
-		if (IsKeyDown(KEY_W) && !m_outOfBoundsUp) m_position.y -= m_velocity.y;
-		if (IsKeyDown(KEY_S) && !m_outOfBoundsDown) m_position.y += m_velocity.y;
+		if (IsKeyDown(KEY_D) && canMoveRight) m_position.x += m_velocity.x;
+		if (IsKeyDown(KEY_A) && canMoveLeft) m_position.x -= m_velocity.x;
+		if (IsKeyDown(KEY_W) && canMoveUp) m_position.y -= m_velocity.y;
+		if (IsKeyDown(KEY_S) && canMoveDown) m_position.y += m_velocity.y;
 
 		// Set the player rectangle position
 		m_rectangle.x = m_position.x;
 		m_rectangle.y = m_position.y;
-	}
-
-	void setOutOfBoundsR(bool tf) {
-		m_outOfBoundsR = tf;
-	}
-
-
-	void setOutOfBoundsL(bool tf) {
-		m_outOfBoundsL = tf;
-	}
-
-	void setOutOfBoundsUp(bool tf) {
-		m_outOfBoundsUp = tf;
-	}
-
-	void setOutOfBoundsDown(bool tf) {
-		m_outOfBoundsDown = tf;
 	}
 
 	// Bring the player back to the spawnpoint
@@ -79,6 +70,7 @@ public:
 	}
 
 	void setSpawnPoint(Vector2 spawnpoint) {
+		m_position = spawnpoint;
 		m_spawnpoint = spawnpoint;
 	}
 

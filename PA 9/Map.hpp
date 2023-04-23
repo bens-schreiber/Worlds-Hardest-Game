@@ -3,6 +3,7 @@
 #include "FrameListenable.hpp"
 #include "consts.hpp"
 #include <vector>
+#include <iostream>
 #include "raylib.h"
 
 struct MapComponent {
@@ -24,55 +25,55 @@ public:
 
 	void handleCollision() {
 
+		player().resetMovement();
+		for (const auto& i : m_components) {
+			handlePlayerCollision(i.rectangle);
+		}
+	}
+
+	// Check every single component of the map against the player.
+	// Assume all movement is false (via resetMovement)
+	// If the player can make a movement (UP, DOWN, RIGHT, LEFT) in the next frame (+ velocity) enable the movement
+	// Else, the movement is already false.
+	void handlePlayerCollision(Rectangle rect) {
+
 		Rectangle playerRect = player().getRectangle();
 
-		bool outUp = true;
-		bool outDown = true;
-		bool outRight = true;
-		bool outLeft = true;
-		for (const auto& i : m_components) {
-			Rectangle rect = i.rectangle;
-			if (outUp && CheckCollisionRecs({
-				playerRect.x, 
-				playerRect.y - player().getVelocity().y - playerRect.height,
-				playerRect.width, 
-				playerRect.height
-				}, rect)) {
-				outUp = false;
-			}
-
-			if (outDown && CheckCollisionRecs({
-				playerRect.x,
-				playerRect.y + player().getVelocity().y + playerRect.height,
-				playerRect.width,
-				playerRect.height
-				}, rect)) {
-				outDown = false;
-			}
-
-			if (outRight && CheckCollisionRecs({
-				playerRect.x + player().getVelocity().x + playerRect.width,
-				playerRect.y,
-				playerRect.width,
-				playerRect.height
-				}, rect)) {
-				outRight = false;
-			}
-			if (outLeft && CheckCollisionRecs({
-				playerRect.x - player().getVelocity().x - playerRect.width,
-				playerRect.y,
-				playerRect.width,
-				playerRect.height
-				}, rect)) {
-				outLeft = false;
-			}
-
+		if (!player().canMoveUp && CheckCollisionRecs({
+			playerRect.x, 
+			playerRect.y - player().getVelocity().y - playerRect.height,
+			playerRect.width, 
+			playerRect.height
+			}, rect)) {
+			player().canMoveUp = true;
 		}
 
-		player().setOutOfBoundsUp(outUp);
-		player().setOutOfBoundsDown(outDown);
-		player().setOutOfBoundsR(outRight);
-		player().setOutOfBoundsL(outLeft);
+		if (!player().canMoveDown && CheckCollisionRecs({
+			playerRect.x,
+			playerRect.y + player().getVelocity().y + playerRect.height,
+			playerRect.width,
+			playerRect.height
+			}, rect)) {
+			player().canMoveDown = true;
+		}
+
+		if (!player().canMoveRight && CheckCollisionRecs({
+			playerRect.x + player().getVelocity().x + playerRect.width,
+			playerRect.y,
+			playerRect.width,
+			playerRect.height
+			}, rect)) {
+			player().canMoveRight = true;
+		}
+
+		if (!player().canMoveLeft && CheckCollisionRecs({
+			playerRect.x - player().getVelocity().x - playerRect.width,
+			playerRect.y,
+			playerRect.width,
+			playerRect.height
+			}, rect)) {
+			player().canMoveLeft = true;
+		}
 	}
 	
 	void draw() {

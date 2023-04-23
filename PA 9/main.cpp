@@ -1,13 +1,7 @@
 
 #include "raylib.h"
 #include "consts.hpp"
-#include "Entity.hpp"
-#include "Player.hpp"
-#include "LinearBall.hpp"
-#include "Map.hpp"
-#include "Interface.hpp"
-#include "MapFactory.hpp"
-#include <vector>
+#include "Game.hpp"
 
 int main(void)
 {
@@ -18,41 +12,20 @@ int main(void)
     // Set our game to run at 60 frames-per-second
     SetTargetFPS(60);
 
-    // Create a player entity to be the main controllable actor of the game.
-    // The player is dependency injected into the PlayerCollideable interface
-    Player p;
-    PlayerCollidable::setPlayer(&p);
-
-    // Create a map
-    Map m = MapFactory().mapFromFile();
-
-    // Set the players spawnpoint to the new maps spawnpoint
-    p.setSpawnPoint(m.getSpawnpoint());
-
     // List of all drawable and updateable entities 
-    std::vector<FrameListenable*> frameListenables = {
-        new Interface(),
-        &m,
-        &p,
-        new LinearBall({ screenWidth / 2, screenHeight / 2}, {0,-5}),
-        new LinearBall({ screenWidth / 3, screenHeight / 2}, {0,5}),
-        new LinearBall({ screenWidth / 4, screenHeight / 2}, {0,-5}),
-    };
+    Game g;
+    g.initialize();
 
     while (!WindowShouldClose())   
     {
 
         // Update all entities each frame
-        for (const auto& i : frameListenables) {
-            i->update();
-        }
-
+        g.update();
+        
         BeginDrawing();
         
         // Draw all entities each frame
-        for (const auto& i : frameListenables) {
-            i->draw();
-        }
+        g.draw();
 
         ClearBackground(mapBackground);
 

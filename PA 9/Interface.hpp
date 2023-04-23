@@ -30,5 +30,5 @@ public:
 	}
 
 	// Do nothing for collision
-	void handleCollision() {}
+	void handlePlayerCollision(Rectangle rect) {}
 };
