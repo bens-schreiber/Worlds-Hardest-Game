@@ -53,5 +53,8 @@
     <ClInclude Include="Entity.hpp">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="Interface.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
