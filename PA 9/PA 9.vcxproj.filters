@@ -62,9 +62,6 @@
     <ClInclude Include="MapFactory.hpp">
       <Filter>Header Files\FrameListenables\Map</Filter>
     </ClInclude>
-    <ClInclude Include="EntityCollidable.hpp">
-      <Filter>Header Files\Abstract</Filter>
-    </ClInclude>
     <ClInclude Include="Interface.hpp">
       <Filter>Header Files\FrameListenables</Filter>
     </ClInclude>

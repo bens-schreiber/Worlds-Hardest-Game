@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.hpp"
 
-// Dependency injection for using getting the Player
+// Dependency injection for getting the Player
 class PlayerDependency{
 	static Player* m_player;
 

@@ -131,7 +131,6 @@
     <ClCompile Include="PlayerDependency.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EntityCollidable.hpp" />
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
     <ClInclude Include="Game.hpp" />
