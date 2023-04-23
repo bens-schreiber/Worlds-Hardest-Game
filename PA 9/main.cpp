@@ -46,7 +46,7 @@ int main(void)
             i->draw();
         }
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(mapBackground);
 
         EndDrawing();
     }

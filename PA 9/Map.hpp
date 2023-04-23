@@ -30,7 +30,7 @@ public:
 	
 	void draw() {
 		for (const auto& i : m_components) {
-			DrawRectangleRec(i, GRAY);
+			DrawRectangleRec(i, checkers);
 		}
 	}
 
