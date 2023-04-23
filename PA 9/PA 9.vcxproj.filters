@@ -28,6 +28,12 @@
     <Filter Include="Header Files\FrameListenables\Map">
       <UniqueIdentifier>{9fa6f7fc-ad18-46e1-8ff1-7a8d9f1b72dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\tutorial">
+      <UniqueIdentifier>{422bbf63-6373-4bbc-8254-6544e1663328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\level">
+      <UniqueIdentifier>{590b82c4-12d7-4b35-a433-19c458da149c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,8 +82,14 @@
     <None Include="README.md">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="level1.whgm">
-      <Filter>Resource Files</Filter>
+    <None Include="tutorial1.whg">
+      <Filter>Resource Files\tutorial</Filter>
+    </None>
+    <None Include="tutorial2.whg">
+      <Filter>Resource Files\tutorial</Filter>
+    </None>
+    <None Include="level1.whg">
+      <Filter>Resource Files\level</Filter>
     </None>
   </ItemGroup>
 </Project>

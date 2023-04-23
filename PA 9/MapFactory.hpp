@@ -26,6 +26,9 @@ class MapFactory  {
 	// checkered square
 	MapComponent basicMapComponent() {
 		MapComponent c = { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions},  m_altColors ? mapCheckerColor : RAYWHITE };
+		
+		// Flip bool for alternating checker pattern
+		m_altColors = !m_altColors;
 		return c;
 	}
 
@@ -56,7 +59,11 @@ class MapFactory  {
 	MapComponent createMapComponent(const char& i) {
 		switch (i) {
 		case '@':
-			m_map.m_spawnpoint = m_position;
+			// Spawn in the middle of the square
+			m_map.m_spawnpoint = {
+				m_position.x + (playerDimensions) / 2,
+				m_position.y + (playerDimensions) / 2 
+			};
 			return safeMapComponent();
 		case '#':
 			return basicMapComponent();
@@ -78,15 +85,19 @@ public:
 	MapFactory(std::vector<FrameListenable*>& frameListenables) 
 		: m_frameListenables(frameListenables) {}
 
-	// Creates a map from a .whgm file
+	// Creates a map from a .whg file
 	Map mapFromFile() {
 
 		// Open file
 		std::fstream file;
-		file.open("level1.whgm", std::ios::in);
+		file.open("level1.whg", std::ios::in);
 		
 		// Parse each line
 		std::string line;
+
+		std::getline(file, line);
+		m_map.m_title = line;
+
 		while (std::getline(file, line)) {
 			
 			// Parse each character
@@ -99,10 +110,10 @@ public:
 
 				// Increment position
 				m_position.x += mapComponentDimensions;
-
-				// Flip bool for alternating checker pattern
-				m_altColors = !m_altColors;
 			}
+
+			// Flip bool for alternating checker pattern
+			m_altColors = !m_altColors;
 
 			// New row, set position to 0
 			m_position.x = 0;

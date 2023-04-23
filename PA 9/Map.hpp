@@ -15,6 +15,7 @@ struct MapComponent {
 // Map class. Composed of rectangles that the player must be colliding with at all times.
 class Map : public FrameListenable, PlayerCollidable {
 	friend class MapFactory;
+	std::string m_title;
 	std::vector<MapComponent> m_components;
 	Vector2 m_spawnpoint{ 0,0 };
 
