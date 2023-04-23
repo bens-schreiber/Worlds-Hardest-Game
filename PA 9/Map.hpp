@@ -24,16 +24,55 @@ public:
 
 	void handleCollision() {
 
-		bool colliding = false;
+		Rectangle playerRect = player().getRectangle();
+
+		bool outUp = true;
+		bool outDown = true;
+		bool outRight = true;
+		bool outLeft = true;
 		for (const auto& i : m_components) {
-			if (CheckCollisionRecs(i.rectangle, player().getRectangle())) {
-				colliding = true;
-				break;
+			Rectangle rect = i.rectangle;
+			if (outUp && CheckCollisionRecs({
+				playerRect.x, 
+				playerRect.y - player().getVelocity().y - playerRect.height,
+				playerRect.width, 
+				playerRect.height
+				}, rect)) {
+				outUp = false;
 			}
+
+			if (outDown && CheckCollisionRecs({
+				playerRect.x,
+				playerRect.y + player().getVelocity().y + playerRect.height,
+				playerRect.width,
+				playerRect.height
+				}, rect)) {
+				outDown = false;
+			}
+
+			if (outRight && CheckCollisionRecs({
+				playerRect.x + player().getVelocity().x + playerRect.width,
+				playerRect.y,
+				playerRect.width,
+				playerRect.height
+				}, rect)) {
+				outRight = false;
+			}
+			if (outLeft && CheckCollisionRecs({
+				playerRect.x - player().getVelocity().x - playerRect.width,
+				playerRect.y,
+				playerRect.width,
+				playerRect.height
+				}, rect)) {
+				outLeft = false;
+			}
+
 		}
 
-		if (colliding) return;
-		player().resetPosition();
+		player().setOutOfBoundsUp(outUp);
+		player().setOutOfBoundsDown(outDown);
+		player().setOutOfBoundsR(outRight);
+		player().setOutOfBoundsL(outLeft);
 	}
 	
 	void draw() {
@@ -42,7 +81,6 @@ public:
 		}
 	}
 
-	// Called every frame
 	void update() {
 		handleCollision();
 	}
