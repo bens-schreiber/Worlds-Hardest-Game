@@ -7,10 +7,10 @@
 #include <vector>
 #include "LinearBall.hpp"
 #include "FrameListenable.hpp"
-#include "EntityCollidable.hpp"
+#include "EntityDependency.hpp"
 
 // Factory class dedicated to making Map objects
-class MapFactory : EntityCollidable {
+class MapFactory : EntityDependency {
 
 	std::vector<FrameListenable*>& m_frameListenables;
 	Map m_map;
@@ -30,14 +30,14 @@ class MapFactory : EntityCollidable {
 	// Add the ball to the frame listenables and the entity collision list
 	void createXBall() {
 		auto b = new LinearBall(m_position, { 5, 0 });
-		EntityCollidable::addEntity(b);
+		EntityDependency::addEntity(b);
 		m_frameListenables.push_back(b);
 	}
 
 	// Add the ball to the frame listenables and the entity collision list
 	void createYBall() {
 		auto b = new LinearBall(m_position, { 0, 5 });
-		EntityCollidable::addEntity(b);
+		EntityDependency::addEntity(b);
 		m_frameListenables.push_back(b);
 	}
 
@@ -63,7 +63,7 @@ class MapFactory : EntityCollidable {
 public:
 
 	MapFactory(std::vector<FrameListenable*>& frameListenables) 
-		: EntityCollidable(), m_frameListenables(frameListenables) {}
+		: EntityDependency(), m_frameListenables(frameListenables) {}
 
 	// Creates a map from a .whgm file
 	Map mapFromFile() {

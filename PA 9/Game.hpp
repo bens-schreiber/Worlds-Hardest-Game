@@ -19,7 +19,7 @@ public:
 
 		// Create a player entity to be the main controllable actor of the game.
 		// The player is dependency injected into the PlayerCollideable interface
-		PlayerCollidable::setPlayer(&m_player);
+		PlayerDependency::setPlayer(&m_player);
 
 		m_frameListenables.push_back(new Interface());
 

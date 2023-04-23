@@ -127,9 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EntityCollidable.cpp" />
+    <ClCompile Include="EntityDependency.cpp" />
+    <ClCompile Include="EntityDependency.hpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PlayerCollidable.cpp" />
+    <ClCompile Include="PlayerDependency.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EntityCollidable.hpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="MapFactory.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerCollidable.hpp" />
+    <ClInclude Include="PlayerDependency.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="level1.whgm" />

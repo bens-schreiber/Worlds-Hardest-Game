@@ -2,14 +2,14 @@
 
 #include "consts.hpp"
 #include "FrameListenable.hpp"
-#include "PlayerCollidable.hpp"
+#include "PlayerDependency.hpp"
 #include <sstream>
 
-class Interface : public FrameListenable, PlayerCollidable
+class Interface : public FrameListenable, PlayerDependency
 {
 public:
 
-	Interface() : PlayerCollidable() 
+	Interface() : PlayerDependency()
 		{};
 
 	void draw()
