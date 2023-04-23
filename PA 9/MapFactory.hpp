@@ -9,12 +9,12 @@
 class MapFactory {
 
 	Map m_map;
-	Vector2 m_position{ 0,0 };
+	Vector2 m_position{ 0,interfaceBarHeight};
 	bool m_altColors = false;
 
 	// checkered square
 	MapComponent basicMapRectangle() {
-		MapComponent c = { {m_position.x, m_position.y, mapComponentWidth, mapComponentWidth},  m_altColors ? GRAY : DARKGRAY };
+		MapComponent c = { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions},  m_altColors ? mapCheckerColor : RAYWHITE };
 		m_altColors = !m_altColors;
 		return c;
 	}
@@ -40,10 +40,10 @@ public:
 		while (std::getline(file, line)) {
 			for (const auto& i : line) {
 				m_map.m_components.push_back(createMapComponent(i));
-				m_position.x += mapComponentWidth;
+				m_position.x += mapComponentDimensions;
 			}
 			m_position.x = 0;
-			m_position.y += mapComponentWidth;
+			m_position.y += mapComponentDimensions;
 			m_altColors = !m_altColors;
 		}
 

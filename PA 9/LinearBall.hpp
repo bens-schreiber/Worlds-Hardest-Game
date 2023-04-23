@@ -16,10 +16,10 @@ public:
 	void draw() {
 
 		// BACKGROUND
-		DrawCircle(m_position.x, m_position.y, radius, BLACK);
+		DrawCircle(m_position.x, m_position.y, ballRadius, BLACK);
 
 		// BALL
-		DrawCircle(m_position.x, m_position.y, radius - 7, DARKBLUE);
+		DrawCircle(m_position.x, m_position.y, ballRadius - 7, DARKBLUE);
 	}
 	void update() {
 
@@ -27,26 +27,26 @@ public:
 		m_position.x += m_velocity.x;
 		m_position.y += m_velocity.y;
 
-		if (m_position.y >= screenHeight - radius - barHeight)
+		if (m_position.y >= screenHeight - ballRadius - interfaceBarHeight)
 		{
 			m_velocity.y *= -1; // change directions
 		}
-		if (m_position.y <= radius + barHeight)
+		if (m_position.y <= ballRadius + interfaceBarHeight)
 		{
 			m_velocity.y *= -1;
 		}
-		if (m_position.x >= screenWidth - radius)
+		if (m_position.x >= screenWidth - ballRadius)
 		{
 			m_velocity.x *= -1;
 		}
-		if (m_position.x <= radius)
+		if (m_position.x <= ballRadius)
 		{
 			m_velocity.x *= -1;
 		}
 		handleCollision();
 	}
 	void handleCollision() {
-		if (CheckCollisionCircleRec(m_position, radius, player().getRectangle()))
+		if (CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
 		{
 			player().resetPosition();
 		}

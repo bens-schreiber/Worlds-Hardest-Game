@@ -23,18 +23,20 @@ int main(void)
     Player p;
     PlayerCollidable::setPlayer(&p);
 
+    // Create a map
     Map m = MapFactory().mapFromFile();
 
+    // Set the players spawnpoint to the new maps spawnpoint
     p.setSpawnPoint(m.getSpawnpoint());
 
     // List of all drawable and updateable entities 
     std::vector<FrameListenable*> frameListenables = {
+        new Interface(),
         &m,
         &p,
         new LinearBall({ screenWidth / 2, screenHeight / 2}, {0,-5}),
         new LinearBall({ screenWidth / 3, screenHeight / 2}, {0,5}),
         new LinearBall({ screenWidth / 4, screenHeight / 2}, {0,-5}),
-        new Interface(),
     };
 
     while (!WindowShouldClose())   

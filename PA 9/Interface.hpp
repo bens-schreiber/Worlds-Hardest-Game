@@ -11,10 +11,10 @@ public:
 
 	void draw()
 	{
-		DrawRectangle(0, 0, screenWidth, barHeight, BLACK);
+		DrawRectangle(0, 0, screenWidth, interfaceBarHeight, BLACK);
 		DrawText("LEVEL: 1", 30, 10, 50, WHITE);
 		DrawText("FAILS: 0", screenWidth - 250, 10, 50, WHITE);
-		DrawRectangle(0, screenHeight - barHeight, screenWidth, barHeight, BLACK);
+		DrawRectangle(0, screenHeight - interfaceBarHeight, screenWidth, interfaceBarHeight, BLACK);
 	}
 
 	void update()
