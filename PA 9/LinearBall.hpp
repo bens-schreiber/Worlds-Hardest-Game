@@ -6,11 +6,11 @@
 #include "PlayerCollidable.hpp"
 
 // Ball capable of moving linearly along the X or Y
-class LinearBall : public Entity, public PlayerCollidable
+class LinearBall : public Entity, PlayerCollidable
 {
 public:
 
-	LinearBall(Vector2 position, Vector2 velocity) : Entity(position, velocity), PlayerCollidable()
+	LinearBall(Vector2 position, Vector2 velocity) : Entity(position, velocity)
 	{}
 
 	void draw() {
@@ -29,23 +29,26 @@ public:
 
 		if (m_position.y >= screenHeight - ballRadius - interfaceBarHeight)
 		{
-			m_velocity.y *= -1; // change directions
+			flipVelocityY();
 		}
 		if (m_position.y <= ballRadius + interfaceBarHeight)
 		{
-			m_velocity.y *= -1;
+			flipVelocityY();
 		}
 		if (m_position.x >= screenWidth - ballRadius)
 		{
-			m_velocity.x *= -1;
+			flipVelocityX();
 		}
 		if (m_position.x <= ballRadius)
 		{
-			m_velocity.x *= -1;
+			flipVelocityX();
 		}
-		handlePlayerCollision({});
+
+		handlePlayerCollision();
 	}
-	void handlePlayerCollision(Rectangle rect) {
+	void handlePlayerCollision(Rectangle rect = {}) {
+
+		// If the ball and the player collide
 		if (CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
 		{
 			player().resetPosition();

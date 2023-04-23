@@ -9,5 +9,5 @@ class PlayerCollidable : protected PlayerDependency {
 public:
 
 	// Collide with player logic
-	virtual void handlePlayerCollision(Rectangle rect) = 0;
+	virtual void handlePlayerCollision(Rectangle rect = {}) = 0;
 };

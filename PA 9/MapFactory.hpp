@@ -1,20 +1,26 @@
-#include "Map.hpp"
-#include "consts.hpp"
+#pragma once
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <map>
 #include <vector>
+#include "consts.hpp"
 #include "LinearBall.hpp"
-#include "FrameListenable.hpp"
-#include "EntityDependency.hpp"
+#include "Map.hpp"
 
 // Factory class dedicated to making Map objects
 class MapFactory : EntityDependency {
 
+	// List of frame listenables that the map can add to
 	std::vector<FrameListenable*>& m_frameListenables;
+
+	// Map to be build by factory method
 	Map m_map;
+
+	// Position of the cursor in map
 	Vector2 m_position{ 0,interfaceBarHeight};
+
+	// Bool for alternating the colors of the checker board
 	bool m_altColors = false;
 
 	// checkered square
@@ -23,6 +29,7 @@ class MapFactory : EntityDependency {
 		return c;
 	}
 
+	// green square
 	MapComponent safeMapComponent() {
 		return { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions}, mapComponentSafeColor };
 	}
@@ -30,14 +37,14 @@ class MapFactory : EntityDependency {
 	// Add the ball to the frame listenables and the entity collision list
 	void createXBall() {
 		auto b = new LinearBall(m_position, { 5, 0 });
-		EntityDependency::addEntity(b);
+		addEntity(b);
 		m_frameListenables.push_back(b);
 	}
 
 	// Add the ball to the frame listenables and the entity collision list
 	void createYBall() {
 		auto b = new LinearBall(m_position, { 0, 5 });
-		EntityDependency::addEntity(b);
+		addEntity(b);
 		m_frameListenables.push_back(b);
 	}
 
@@ -57,13 +64,15 @@ class MapFactory : EntityDependency {
 		case 'Y':
 			createYBall();
 			return basicMapComponent();
+		default:
+			return basicMapComponent();
 		}
 	}
 
 public:
 
 	MapFactory(std::vector<FrameListenable*>& frameListenables) 
-		: EntityDependency(), m_frameListenables(frameListenables) {}
+		: m_frameListenables(frameListenables) {}
 
 	// Creates a map from a .whgm file
 	Map mapFromFile() {
@@ -103,7 +112,4 @@ public:
 		file.close();
 		return m_map;
 	}
-
-	// N/A
-	void handleEntityCollision() {}
 };

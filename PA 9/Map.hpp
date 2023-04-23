@@ -1,10 +1,11 @@
 #pragma once
-#include "PlayerCollidable.hpp"
-#include "FrameListenable.hpp"
-#include "consts.hpp"
 #include <vector>
 #include <iostream>
+#include "consts.hpp"
 #include "raylib.h"
+#include "PlayerCollidable.hpp"
+#include "EntityCollidable.hpp"
+#include "FrameListenable.hpp"
 
 struct MapComponent {
 	friend class Map;
@@ -12,22 +13,29 @@ struct MapComponent {
 	Color color;
 };
 
-class MapFactory;
-
 // Map class. Composed of rectangles that the player must be colliding with at all times.
-class Map : public FrameListenable, public PlayerCollidable {
+class Map : public FrameListenable, PlayerCollidable, EntityCollidable {
 	friend class MapFactory;
 	std::vector<MapComponent> m_components;
 	Vector2 m_spawnpoint{ 0,0 };
 
 public:
-	Map() : PlayerCollidable() {}
+	Map() {}
 
 	void handleCollision() {
 
 		player().resetMovement();
 		for (const auto& i : m_components) {
 			handlePlayerCollision(i.rectangle);
+			handleEntityCollision(i.rectangle);
+		}
+	}
+
+	void handleEntityCollision(Rectangle rect = {}) {
+		for (const auto& i : entities()) {
+			if (CheckCollisionPointRec(i->getPosition(), rect)) {
+				i->flipVelocityX();
+			}
 		}
 	}
 

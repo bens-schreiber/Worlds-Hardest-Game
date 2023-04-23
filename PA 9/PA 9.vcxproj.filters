@@ -13,30 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Entities">
-      <UniqueIdentifier>{456a9d00-f905-41b5-b75d-0b750b9dba94}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Map">
       <UniqueIdentifier>{9fa6f7fc-ad18-46e1-8ff1-7a8d9f1b72dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Interfaces">
+    <Filter Include="Header Files\Abstract">
       <UniqueIdentifier>{8e588d93-6e8b-4781-a173-20e07a1d71b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameListenables">
+      <UniqueIdentifier>{f087559c-d903-4363-a16c-8f6fd4551dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameListenables\Entities">
+      <UniqueIdentifier>{456a9d00-f905-41b5-b75d-0b750b9dba94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dependencies">
+      <UniqueIdentifier>{e2c4a2ce-f030-4dc1-a18d-2ee695bf4c6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerCollidable.cpp">
+    <ClCompile Include="EntityDependency.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDependency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityDependency.hpp">
+      <Filter>Header Files\Dependencies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinearBall.hpp">
-      <Filter>Header Files\Entities</Filter>
+      <Filter>Header Files\FrameListenables\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Player.hpp">
-      <Filter>Header Files\Entities</Filter>
+      <Filter>Header Files\FrameListenables\Entities</Filter>
     </ClInclude>
     <ClInclude Include="consts.hpp">
       <Filter>Header Files</Filter>
@@ -45,16 +57,36 @@
       <Filter>Header Files\Map</Filter>
     </ClInclude>
     <ClInclude Include="FrameListenable.hpp">
-      <Filter>Header Files\Interfaces</Filter>
+      <Filter>Header Files\Abstract</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCollidable.hpp">
-      <Filter>Header Files\Interfaces</Filter>
+      <Filter>Header Files\Abstract</Filter>
     </ClInclude>
     <ClInclude Include="Entity.hpp">
-      <Filter>Header Files\Interfaces</Filter>
+      <Filter>Header Files\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="MapFactory.hpp">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCollidable.hpp">
+      <Filter>Header Files\Abstract</Filter>
     </ClInclude>
     <ClInclude Include="Interface.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\FrameListenables</Filter>
     </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>Header Files\FrameListenables</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDependency.hpp">
+      <Filter>Header Files\Dependencies</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="level1.whgm">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

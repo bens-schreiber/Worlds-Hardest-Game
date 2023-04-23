@@ -1,8 +1,9 @@
+#pragma once
 #include <vector>
 #include "Entity.hpp"
 
 // Dependency injection for entities.
-class EntityDependency{
+class EntityDependency {
 	static std::vector<Entity*> m_entities;
 protected:
 	EntityDependency() = default;

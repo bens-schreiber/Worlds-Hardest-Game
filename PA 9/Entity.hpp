@@ -22,7 +22,19 @@ protected:
 	{}
 
 public:
-	Vector2 getVelocity() {
+	Vector2 getVelocity() const {
 		return m_velocity;
+	}
+
+	Vector2 getPosition() const {
+		return m_position;
+	}
+
+	void flipVelocityX() {
+		m_velocity.x *= 1.0f;
+	}
+
+	void flipVelocityY() {
+		m_velocity.y *= -1.0f;
 	}
 };

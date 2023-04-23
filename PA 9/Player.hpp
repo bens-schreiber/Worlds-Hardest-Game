@@ -13,6 +13,7 @@ class Player : public Entity {
 
 public:
 
+	// Movement locks for map behavior
 	bool canMoveRight = true;
 	bool canMoveLeft = true;
 	bool canMoveUp = true;
