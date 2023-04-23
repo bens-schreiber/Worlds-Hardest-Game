@@ -131,6 +131,7 @@
     <ClCompile Include="PlayerDependency.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Endzone.hpp" />
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
     <ClInclude Include="Game.hpp" />

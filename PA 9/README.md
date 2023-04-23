@@ -4,6 +4,8 @@
 
 $ - safezone
 
+% - endzone ( go to next level )
+
 \# - normal block
 
 R - linear ball on X axis going right

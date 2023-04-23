@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <deque>
 #include <iostream>
 #include "consts.hpp"
 #include "raylib.h"
@@ -16,7 +16,7 @@ struct MapComponent {
 class Map : public FrameListenable, PlayerCollidable {
 	friend class MapFactory;
 	std::string m_title;
-	std::vector<MapComponent> m_components;
+	std::deque<MapComponent> m_components;
 	Vector2 m_spawnpoint{ 0,0 };
 
 public:

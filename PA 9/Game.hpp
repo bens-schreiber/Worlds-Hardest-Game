@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <deque>
 #include "FrameListenable.hpp"
 #include "Player.hpp"
 #include "PlayerCollidable.hpp"
@@ -10,7 +10,7 @@ class Game : public FrameListenable {
 
 	Player m_player = Player();
 
-	std::vector<FrameListenable*> m_frameListenables = {};
+	std::deque<FrameListenable*> m_frameListenables = {};
 
 	Map m_map = MapFactory(m_frameListenables).mapFromFile();
 
@@ -30,18 +30,18 @@ public:
 
 	void update() {
 		m_map.update();
-		m_player.update();
 		for (const auto& i : m_frameListenables) {
 			i->update();
 		}
+		m_player.update();
 	}
 
 	void draw() {
 		m_map.draw();
-		m_player.draw();
 		for (const auto& i : m_frameListenables) {
 			i->draw();
 		}
+		m_player.draw();
 	}
 
 };

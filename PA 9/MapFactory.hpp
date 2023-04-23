@@ -3,16 +3,17 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <vector>
+#include <deque>
 #include "consts.hpp"
 #include "LinearBall.hpp"
 #include "Map.hpp"
+#include "Endzone.hpp"
 
 // Factory class dedicated to making Map objects
 class MapFactory  {
 
 	// List of frame listenables that the map can add to
-	std::vector<FrameListenable*>& m_frameListenables;
+	std::deque<FrameListenable*>& m_frameListenables;
 
 	// Map to be build by factory method
 	Map m_map;
@@ -69,6 +70,9 @@ class MapFactory  {
 			return basicMapComponent();
 		case '$':
 			return safeMapComponent();
+		case '%':
+			m_frameListenables.push_back(new Endzone(m_position));
+			return safeMapComponent();
 		case 'R':
 			createXBall(true);
 			return basicMapComponent();
@@ -82,7 +86,7 @@ class MapFactory  {
 
 public:
 
-	MapFactory(std::vector<FrameListenable*>& frameListenables) 
+	MapFactory(std::deque<FrameListenable*>& frameListenables) 
 		: m_frameListenables(frameListenables) {}
 
 	// Creates a map from a .whg file
@@ -103,7 +107,7 @@ public:
 			// Parse each character
 			for (const auto& i : line) {
 
-				// 0 is blank space, ignore if so
+				// 0 is blank space
 				if (i != '0') {
 					m_map.m_components.push_back(createMapComponent(i));
 				}
