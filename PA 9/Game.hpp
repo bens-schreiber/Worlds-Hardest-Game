@@ -96,6 +96,7 @@ public:
 	}
 
 	void draw() {
+
 		m_map.draw();
 		for (const auto& i : m_frameListenables) i->draw();
 		m_player->draw();

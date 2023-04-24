@@ -10,6 +10,7 @@ public:
 	void handlePlayerCollision(Rectangle rect = {}) {
 		if (CheckCollisionRecs(player().getRectangle(), m_rect)) {
 			player().levelCompleted = true;
+			player().resetPosition();
 		}
 	}
 
