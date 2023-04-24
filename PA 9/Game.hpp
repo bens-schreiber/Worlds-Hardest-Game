@@ -39,15 +39,16 @@ public:
 	}
 
 	void update() {
-
 		m_map.update();
 		for (const auto& i : m_frameListenables) {
 			i->update();
+			
 		}
 		m_player.update();
 	}
 
 	void draw() {
+
 		m_map.draw();
 		for (const auto& i : m_frameListenables) {
 			i->draw();
@@ -56,7 +57,6 @@ public:
 
 		if (m_player.levelCompleted) {
 			nextLevel();
-			return;
 		}
 	}
 
@@ -69,8 +69,8 @@ public:
 		}
 
 		m_frameListenables = { new Interface() };
-		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_player.getLevel()]);
 		m_player.incrementLevel(m_levels.size());
+		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_player.getLevel()]);
 		m_player.setSpawnPoint(m_map.getSpawnpoint());
 	}
 };
