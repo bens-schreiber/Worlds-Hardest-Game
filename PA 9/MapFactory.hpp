@@ -18,7 +18,7 @@ class MapFactory  {
 	Map m_map;
 
 	// Position of the cursor in map
-	Vector2 m_position{ 0,interfaceBarHeight};
+	Vector2 m_position{ mapCenterX, mapCenterY};
 
 	// Bool for alternating the colors of the checker board
 	bool m_altColors = false;
@@ -87,6 +87,7 @@ public:
 		: m_frameListenables(frameListenables) {}
 
 	// Creates a map from a .whg file
+	// See readme for file guidelines
 	Map mapFromFile(std::string fileLocation) {
 
 		// Open file
@@ -96,10 +97,22 @@ public:
 		// Parse each line
 		std::string line;
 
+		// Get the map height
+		std::getline(file, line);
+		int height = atoi(line.c_str());
+		
+		// center the map Y
+		m_position.y -= height * mapComponentDimensions / 2;
+
+		// Get the title
 		std::getline(file, line);
 		m_map.m_title = line;
 
 		while (std::getline(file, line)) {
+
+			// center the map X
+			m_position.x -= line.size() * mapComponentDimensions / 2;
+
 			// Parse each character
 			for (const auto& i : line) {
 
@@ -110,17 +123,11 @@ public:
 
 				// Increment position
 				m_position.x += mapComponentDimensions;
-
-				// Flip bool for alternating checker pattern
-				m_altColors = !m_altColors;
 			}
 
-			// New row, set position to 0
-			m_position.x = 0;
+			// New row, reset X position
+			m_position.x = mapCenterX;
 			m_position.y += mapComponentDimensions;
-
-			// Flip bool for alternating checker pattern
-			m_altColors = !m_altColors;
 		}
 
 		// Close the file

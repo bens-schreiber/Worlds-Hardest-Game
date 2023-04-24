@@ -15,7 +15,6 @@
 
 // interface
 #define interfaceBarHeight screenHeight/12
-#define adjScreenHeight screenHeight - interfaceBarHeight
 
 // color (map)
 #define mapBackground Color { 161, 165, 247, 255}
@@ -24,3 +23,6 @@
 
 // map
 #define mapComponentDimensions 50
+#define mapHeight (screenHeight - interfaceBarHeight)
+#define mapCenterX screenWidth/2
+#define mapCenterY (mapHeight)/2
