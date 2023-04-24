@@ -13,7 +13,7 @@ R - linear ball on X axis going right
 L - linear ball on X axis going left
 
 # FILE FORMAT
-INTEGER MAP HEIGHT
+INTEGER MAP HEIGHT ( generally the amount of rows in the map )
 TITLE
 MAP INFO
 

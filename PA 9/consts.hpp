@@ -26,3 +26,5 @@
 #define mapHeight (screenHeight - interfaceBarHeight)
 #define mapCenterX screenWidth/2
 #define mapCenterY (mapHeight)/2
+#define mapTitleFontSize 50
+#define mapTitleDisplacement 30

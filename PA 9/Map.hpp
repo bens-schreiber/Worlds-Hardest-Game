@@ -13,6 +13,7 @@ struct MapComponent {
 // Map class. Composed of rectangles that the player must be colliding with at all times.
 class Map : public FrameListenable, PlayerCollidable {
 	friend class MapFactory;
+	int m_height;
 	std::string m_title;
 	std::deque<MapComponent> m_components;
 	Vector2 m_spawnpoint{ 0,0 };
@@ -74,6 +75,7 @@ public:
 	}
 	
 	void draw() {
+		DrawText(m_title.c_str(), mapCenterX - MeasureText(m_title.c_str(), mapTitleFontSize) / 2, mapCenterY - (m_height * mapComponentDimensions) - mapTitleDisplacement, mapTitleFontSize, BLACK);
 		for (const auto& i : m_components) {
 			DrawRectangleRec(i.rectangle, i.color);
 		}

@@ -99,10 +99,10 @@ public:
 
 		// Get the map height
 		std::getline(file, line);
-		int height = atoi(line.c_str());
+		m_map.m_height = atoi(line.c_str());
 		
 		// center the map Y
-		m_position.y -= height * mapComponentDimensions / 2;
+		m_position.y -= m_map.m_height * mapComponentDimensions / 2;
 
 		// Get the title
 		std::getline(file, line);
