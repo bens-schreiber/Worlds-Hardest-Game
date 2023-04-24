@@ -97,5 +97,8 @@
     <None Include="level1.whg">
       <Filter>Resource Files\level</Filter>
     </None>
+    <None Include="level2.whg">
+      <Filter>Resource Files\level</Filter>
+    </None>
   </ItemGroup>
 </Project>

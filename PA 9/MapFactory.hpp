@@ -48,8 +48,13 @@ class MapFactory  {
 	}
 
 	// Add the ball to the frame listenables and the entity collision list
-	void createYBall() {
-		auto b = new LinearBall(m_position, { 0, 5 });
+	void createYBall(bool movingUp) {
+		Vector2 velocity = { 0, movingUp ? -5.0f : 5.0f};
+		auto b = new LinearBall(
+			{ m_position.x + ballRadius + ballRadiusOutline, m_position.y + ballRadius + ballRadiusOutline },
+			velocity,
+			{ 0, screenWidth });
+		m_map.m_collidables.push_back(b);
 		m_frameListenables.push_back(b);
 	}
 
@@ -76,6 +81,12 @@ class MapFactory  {
 			return basicMapComponent();
 		case 'L':
 			createXBall(false);
+			return basicMapComponent();
+		case 'U':
+			createYBall(true);
+			return basicMapComponent();
+		case 'D':
+			createYBall(false);
 			return basicMapComponent();
 		default:
 			return basicMapComponent();

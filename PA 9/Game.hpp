@@ -15,7 +15,8 @@ class Game : public FrameListenable {
 	std::vector<std::string> m_levels = {
 		"tutorial1.whg",
 		"tutorial2.whg",
-		"level1.whg"
+		"level1.whg",
+		"level2.whg"
 	};
 
 	Map m_map;

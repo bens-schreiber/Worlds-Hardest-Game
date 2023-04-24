@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="level1.whg" />
+    <None Include="level2.whg" />
     <None Include="README.md" />
     <None Include="tutorial1.whg" />
     <None Include="tutorial2.whg" />
