@@ -2,6 +2,8 @@
 
 @ - player spawnpoint (safezone)
 
+T - automated test player
+
 $ - safezone
 
 % - endzone ( go to next level )

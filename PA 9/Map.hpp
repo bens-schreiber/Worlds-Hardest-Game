@@ -1,9 +1,11 @@
 #pragma once
 #include <vector>
+#include <deque>
 #include <iostream>
 #include "consts.hpp"
 #include "MapCollidable.hpp"
 #include "PlayerDependency.hpp"
+#include "AutomatedPlayer.hpp"
 
 struct MapComponent {
 	friend class Map;
@@ -16,6 +18,7 @@ class Map : public FrameListenable, PlayerDependency {
 	friend class MapFactory;
 	int m_height{ 0 };
 	std::string m_title;
+	std::deque<char> m_automatedInstructions;
 	std::vector<MapComponent> m_components = {};
 	std::vector<MapCollidable*> m_collidables = { playerPointer() };
 	Vector2 m_spawnpoint{ 0,0 };
@@ -54,6 +57,15 @@ public:
 	}
 
 	void update() {
+		if (m_automatedInstructions.size() > 0) {
+
+			// Player must be the automated player if instructions are found.
+			AutomatedPlayer* p = (AutomatedPlayer*) &player();
+
+			// Automate player movement
+			p->move(m_automatedInstructions.front());
+			m_automatedInstructions.pop_front();
+		}
 		handleCollision();
 	}
 

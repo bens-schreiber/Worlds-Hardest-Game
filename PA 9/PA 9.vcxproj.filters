@@ -34,6 +34,9 @@
     <Filter Include="Resource Files\level">
       <UniqueIdentifier>{590b82c4-12d7-4b35-a433-19c458da149c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\tests">
+      <UniqueIdentifier>{54a268f3-a9e1-49ba-b941-2c2608a7c3d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,6 +86,9 @@
     <ClInclude Include="MapCollidable.hpp">
       <Filter>Header Files\Abstract</Filter>
     </ClInclude>
+    <ClInclude Include="AutomatedPlayer.hpp">
+      <Filter>Header Files\FrameListenables\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
@@ -99,6 +105,21 @@
     </None>
     <None Include="level2.whg">
       <Filter>Resource Files\level</Filter>
+    </None>
+    <None Include="test1.whgt">
+      <Filter>Resource Files\tests</Filter>
+    </None>
+    <None Include="test3.whgt">
+      <Filter>Resource Files\tests</Filter>
+    </None>
+    <None Include="test2.whgt">
+      <Filter>Resource Files\tests</Filter>
+    </None>
+    <None Include="test4.whgt">
+      <Filter>Resource Files\tests</Filter>
+    </None>
+    <None Include="test5.whgt">
+      <Filter>Resource Files\tests</Filter>
     </None>
   </ItemGroup>
 </Project>

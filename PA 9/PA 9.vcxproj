@@ -131,6 +131,7 @@
     <ClCompile Include="PlayerDependency.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutomatedPlayer.hpp" />
     <ClInclude Include="Endzone.hpp" />
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
@@ -149,6 +150,11 @@
     <None Include="level1.whg" />
     <None Include="level2.whg" />
     <None Include="README.md" />
+    <None Include="test1.whgt" />
+    <None Include="test3.whgt" />
+    <None Include="test2.whgt" />
+    <None Include="test4.whgt" />
+    <None Include="test5.whgt" />
     <None Include="tutorial1.whg" />
     <None Include="tutorial2.whg" />
   </ItemGroup>

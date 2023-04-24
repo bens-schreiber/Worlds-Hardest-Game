@@ -61,6 +61,8 @@ class MapFactory  {
 	// Switch based off the char given
 	MapComponent createMapComponent(const char& i) {
 		switch (i) {
+
+		case 'T':
 		case '@':
 			// Spawn in the middle of the square
 			m_map.m_spawnpoint = {
@@ -93,33 +95,7 @@ class MapFactory  {
 		}
 	}
 
-public:
-
-	MapFactory(std::deque<FrameListenable*>& frameListenables) 
-		: m_frameListenables(frameListenables) {}
-
-	// Creates a map from a .whg file
-	// See readme for file guidelines
-	Map mapFromFile(std::string fileLocation) {
-
-		// Open file
-		std::fstream file;
-		file.open(fileLocation, std::ios::in);
-		
-		// Parse each line
-		std::string line;
-
-		// Get the map height
-		std::getline(file, line);
-		m_map.m_height = atoi(line.c_str());
-		
-		// center the map Y
-		m_position.y -= m_map.m_height * mapComponentDimensions / 2;
-
-		// Get the title
-		std::getline(file, line);
-		m_map.m_title = line;
-
+	void _mapFromFile(std::fstream &file, std::string &line) {
 		while (std::getline(file, line)) {
 
 			// center the map X
@@ -141,9 +117,50 @@ public:
 			m_position.x = mapCenterX;
 			m_position.y += mapComponentDimensions;
 		}
+	}
 
-		// Close the file
-		file.close();
+public:
+
+	MapFactory(std::deque<FrameListenable*>& frameListenables) 
+		: m_frameListenables(frameListenables) {}
+
+	// Creates a map from a .whg or .whgt file
+	// See readme for file guidelines
+	Map mapFromFile(std::string fileLocation) {
+
+		// Open file
+		std::fstream file;
+		file.open(fileLocation, std::ios::in);
+
+		// Parse each line
+		std::string line;
+
+		// Get the map height
+		std::getline(file, line);
+		m_map.m_height = atoi(line.c_str());
+
+		// center the map Y
+		m_position.y -= m_map.m_height * mapComponentDimensions / 2;
+
+		// map title
+		std::getline(file, line);
+		m_map.m_title = line;
+
+		// Determine if the map has automated instructions
+		if (fileLocation.find("whgt") != std::string::npos) {
+
+			// Get the automated instructions
+			std::getline(file, line);
+			for (const auto i : line) {
+				// 0 means no instructions 
+				if (i == '0') break;
+				m_map.m_automatedInstructions.push_back(i);
+			}
+		}
+
+		// Process the map contents
+		_mapFromFile(file, line);
+
 		return m_map;
 	}
 };
