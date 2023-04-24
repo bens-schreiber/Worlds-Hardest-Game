@@ -15,6 +15,7 @@ struct MapComponent {
 class Map : public FrameListenable, PlayerDependency {
 	friend class MapFactory;
 	int m_height;
+	int m_level; //
 	std::string m_title;
 	std::vector<MapComponent> m_components = {};
 	std::vector<MapCollidable*> m_collidables = { playerPointer() };
@@ -58,5 +59,10 @@ public:
 
 	Vector2 getSpawnpoint() const {
 		return m_spawnpoint;
+	}
+
+	int getLevel()
+	{
+		return m_level;
 	}
 };

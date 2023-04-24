@@ -147,4 +147,5 @@ public:
 	int getLevel() {
 		return m_level;
 	}
+
 };

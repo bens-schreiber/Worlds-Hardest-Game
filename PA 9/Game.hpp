@@ -43,6 +43,7 @@ public:
 		m_map.update();
 		for (const auto& i : m_frameListenables) {
 			i->update();
+			
 		}
 		m_player.update();
 	}

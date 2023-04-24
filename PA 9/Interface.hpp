@@ -6,7 +6,7 @@
 class Interface : public FrameListenable, PlayerDependency
 {
 public:
-
+	int i = 0;
 	Interface() : PlayerDependency()
 		{};
 
@@ -17,6 +17,14 @@ public:
 		std::stringstream ss;
 		ss << "FAILS: " << player().getDeaths();
 		DrawText(ss.str().c_str(), 30, 10, 50, WHITE);
+		std::stringstream s;
+		if (player().getLevel() == 0) {
+			s << "LEVEL: " << player().getLevel();
+		}
+		else {
+			s << "LEVEL: " << player().getLevel() - 1;
+		}
+		DrawText(s.str().c_str(), 1500, 10, 50, WHITE);
 		DrawRectangle(0, screenHeight - interfaceBarHeight, screenWidth, interfaceBarHeight, BLACK);
 	}
 
