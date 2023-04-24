@@ -12,6 +12,10 @@ R - linear ball on X axis going right
 
 L - linear ball on X axis going left
 
+U - linear ball on the Y axis going up
+
+D - linear ball on the Y axis going down
+
 # FILE FORMAT
 INTEGER MAP HEIGHT ( generally the amount of rows in the map )
 TITLE

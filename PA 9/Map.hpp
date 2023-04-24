@@ -38,6 +38,12 @@ class Map : public FrameListenable, PlayerDependency {
 
 public:
 	Map() {}
+
+	//~Map() {
+	//	for (auto& i : m_collidables) {
+	//		delete i;
+	//	}
+	//}
 	
 	void draw() {
 		DrawText(m_title.c_str(), mapCenterX - MeasureText(m_title.c_str(), mapTitleFontSize) / 2, mapCenterY - (m_height * mapComponentDimensions) - mapTitleDisplacement, mapTitleFontSize, BLACK);
