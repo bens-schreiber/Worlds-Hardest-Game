@@ -14,8 +14,7 @@ struct MapComponent {
 // Map class. Composed of rectangles that the player must be colliding with at all times.
 class Map : public FrameListenable, PlayerDependency {
 	friend class MapFactory;
-	int m_height;
-	int m_level; //
+	int m_height{ 0 };
 	std::string m_title;
 	std::vector<MapComponent> m_components = {};
 	std::vector<MapCollidable*> m_collidables = { playerPointer() };
@@ -38,6 +37,7 @@ class Map : public FrameListenable, PlayerDependency {
 	}
 
 public:
+
 	Map() {}
 
 	//~Map() {
@@ -59,10 +59,5 @@ public:
 
 	Vector2 getSpawnpoint() const {
 		return m_spawnpoint;
-	}
-
-	int getLevel()
-	{
-		return m_level;
 	}
 };
