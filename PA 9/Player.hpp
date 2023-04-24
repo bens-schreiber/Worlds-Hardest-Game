@@ -7,6 +7,7 @@
 // Main player of the game. Moveable via WASD keys.
 class Player : public Entity, public MapCollidable {
 
+protected:
 	int m_deaths = 0;
 	int m_level = 0;
 	Vector2 m_spawnpoint;
@@ -68,9 +69,6 @@ public:
 		m_rectangle.x = m_position.x;
 		m_rectangle.y = m_position.y;
 	}
-	void handleMapOutOfBounds() {
-	}
-
 
 	// Check every single component of the map against the player.
 	// If the player can make a movement (UP, DOWN, RIGHT, LEFT) in the next frame (+ velocity) enable the movement
@@ -116,6 +114,10 @@ public:
 		return false;
 	}
 
+	// Handled in checkMapCollision
+	void handleMapOutOfBounds() {
+	}
+
 	// Bring the player back to the spawnpoint
 	void resetPosition() {
 		m_position = m_spawnpoint;
@@ -139,9 +141,8 @@ public:
 		m_deaths++;
 	}
 
-	void incrementLevel(int maxLevel) {
+	void incrementLevel() {
 		m_level++;
-		m_level %= maxLevel;
 	}
 
 	int getLevel() {

@@ -28,3 +28,6 @@
 #define mapCenterY (mapHeight)/2
 #define mapTitleFontSize 50
 #define mapTitleDisplacement 30
+
+// tests
+#define testDuration 3
