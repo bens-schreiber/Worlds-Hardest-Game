@@ -105,6 +105,8 @@ public:
 
 	void nextLevel() {
 
+		m_player->incrementLevel();
+
 		// end game
 		if (m_player->getLevel() > m_levels.size() - 1) {
 			exit(1);
@@ -123,9 +125,6 @@ public:
 
 		// Create the next map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_player->getLevel()]);
-
-		m_player->incrementLevel();
-
 		// Set spawnpoint to the maps spawnpoint
 		m_player->setSpawnPoint(m_map.getSpawnpoint());
 	}
