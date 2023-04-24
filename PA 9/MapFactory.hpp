@@ -26,6 +26,7 @@ class MapFactory  {
 	// checkered square
 	MapComponent basicMapComponent() {
 		MapComponent c = { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions},  m_altColors ? mapCheckerColor : RAYWHITE };
+		
 		return c;
 	}
 
@@ -99,9 +100,19 @@ public:
 		std::getline(file, line);
 		m_map.m_title = line;
 
+		int col = 0;
+		int row = 0;
 		while (std::getline(file, line)) {
+			row++;
+			
 			// Parse each character
 			for (const auto& i : line) {
+				col++;
+
+				if (i == '#') {
+					// Flip bool for alternating checker pattern
+					m_altColors = (row % 2) ^ (col % 2);
+				}
 
 				// 0 is blank space
 				if (i != '0') {
@@ -111,16 +122,11 @@ public:
 				// Increment position
 				m_position.x += mapComponentDimensions;
 
-				// Flip bool for alternating checker pattern
-				m_altColors = !m_altColors;
 			}
 
 			// New row, set position to 0
 			m_position.x = 0;
 			m_position.y += mapComponentDimensions;
-
-			// Flip bool for alternating checker pattern
-			m_altColors = !m_altColors;
 		}
 
 		// Close the file
