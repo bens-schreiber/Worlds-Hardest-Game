@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Abstract">
+      <UniqueIdentifier>{8e588d93-6e8b-4781-a173-20e07a1d71b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameListenables">
+      <UniqueIdentifier>{f087559c-d903-4363-a16c-8f6fd4551dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameListenables\Entities">
+      <UniqueIdentifier>{456a9d00-f905-41b5-b75d-0b750b9dba94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dependencies">
+      <UniqueIdentifier>{e2c4a2ce-f030-4dc1-a18d-2ee695bf4c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameListenables\Map">
+      <UniqueIdentifier>{9fa6f7fc-ad18-46e1-8ff1-7a8d9f1b72dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\tutorial">
+      <UniqueIdentifier>{422bbf63-6373-4bbc-8254-6544e1663328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\level">
+      <UniqueIdentifier>{590b82c4-12d7-4b35-a433-19c458da149c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDependency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LinearBall.hpp">
+      <Filter>Header Files\FrameListenables\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Header Files\FrameListenables\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="consts.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.hpp">
+      <Filter>Header Files\FrameListenables\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameListenable.hpp">
+      <Filter>Header Files\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCollidable.hpp">
+      <Filter>Header Files\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.hpp">
+      <Filter>Header Files\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="MapFactory.hpp">
+      <Filter>Header Files\FrameListenables\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.hpp">
+      <Filter>Header Files\FrameListenables</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>Header Files\FrameListenables</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDependency.hpp">
+      <Filter>Header Files\Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="Endzone.hpp">
+      <Filter>Header Files\FrameListenables\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="MapCollidable.hpp">
+      <Filter>Header Files\Abstract</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tutorial1.whg">
+      <Filter>Resource Files\tutorial</Filter>
+    </None>
+    <None Include="tutorial2.whg">
+      <Filter>Resource Files\tutorial</Filter>
+    </None>
+    <None Include="level1.whg">
+      <Filter>Resource Files\level</Filter>
+    </None>
+  </ItemGroup>
+</Project>
