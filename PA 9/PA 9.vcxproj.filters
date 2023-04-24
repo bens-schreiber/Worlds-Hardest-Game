@@ -42,9 +42,6 @@
     <ClCompile Include="PlayerDependency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameDependency.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinearBall.hpp">
@@ -82,9 +79,6 @@
     </ClInclude>
     <ClInclude Include="Endzone.hpp">
       <Filter>Header Files\FrameListenables\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="GameDependency.hpp">
-      <Filter>Header Files\Dependencies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
