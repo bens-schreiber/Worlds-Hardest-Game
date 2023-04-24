@@ -1,13 +1,15 @@
-#include "GameDependency.hpp"
-
-class Endzone : public Entity, PlayerCollidable, GameDependency {
+#pragma once
+#include <functional>
+#include "PlayerCollidable.hpp"
+class Endzone : public Entity, PlayerCollidable {
+	Rectangle m_rect;
 public:
 
-	Endzone() {}
+	Endzone(Rectangle rect) : m_rect(rect) {}
 
 	void handlePlayerCollision(Rectangle rect = {}) {
-		if (CheckCollisionRecs(player().getRectangle(), { m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions })) {
-			//game().nextLevel();
+		if (CheckCollisionRecs(player().getRectangle(), m_rect)) {
+			player().levelCompleted = true;
 		}
 	}
 

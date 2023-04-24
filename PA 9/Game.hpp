@@ -5,11 +5,14 @@
 
 class Game : public FrameListenable {
 
+	friend class MapFactory;
+
 	Player m_player = Player();
 
 	std::deque<FrameListenable*> m_frameListenables = {};
 
-	std::deque<std::string> m_levels = {
+	int m_levelIndex = 0;
+	std::string m_levels[3] = {
 		"tutorial1.whg",
 		"tutorial2.whg",
 		"level1.whg"
@@ -22,7 +25,7 @@ public:
 	void initialize() {
 
 		// Grab the first map
-		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels.front());
+		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_levelIndex]);
 
 		// Create a player entity to be the main controllable actor of the game.
 		// The player is dependency injected into the PlayerCollideable interface
@@ -35,6 +38,7 @@ public:
 	}
 
 	void update() {
+
 		m_map.update();
 		for (const auto& i : m_frameListenables) {
 			i->update();
@@ -48,17 +52,23 @@ public:
 			i->draw();
 		}
 		m_player.draw();
+
+		if (m_player.levelCompleted) {
+			nextLevel();
+			return;
+		}
 	}
 
 	void nextLevel() {
-		m_levels.pop_front();
+		m_player.levelCompleted = false;
 
 		// Clear listenables
 		for (auto i : m_frameListenables) {
 			delete i;
 		}
 
-		MapFactory(m_frameListenables).mapFromFile(m_levels.front());
+		m_frameListenables = { new Interface() };
+		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_levelIndex++]);
+		m_player.setSpawnPoint(m_map.getSpawnpoint());
 	}
-
 };

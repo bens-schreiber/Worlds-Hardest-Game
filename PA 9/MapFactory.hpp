@@ -4,8 +4,8 @@
 #include <string>
 #include <map>
 #include <deque>
-#include "LinearBall.hpp"
 #include "Map.hpp"
+#include "LinearBall.hpp"
 #include "Endzone.hpp"
 
 // Factory class dedicated to making Map objects
@@ -27,8 +27,6 @@ class MapFactory  {
 	MapComponent basicMapComponent() {
 		MapComponent c = { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions},  m_altColors ? mapCheckerColor : RAYWHITE };
 		
-		// Flip bool for alternating checker pattern
-		m_altColors = !m_altColors;
 		return c;
 	}
 
@@ -70,8 +68,9 @@ class MapFactory  {
 		case '$':
 			return safeMapComponent();
 		case '%':
-			m_frameListenables.push_back(new Endzone());
-			return safeMapComponent();
+			auto c = safeMapComponent();
+			m_frameListenables.push_back(new Endzone(c.rectangle));
+			return c;
 		case 'R':
 			createXBall(true);
 			return basicMapComponent();
@@ -101,10 +100,19 @@ public:
 		std::getline(file, line);
 		m_map.m_title = line;
 
+		int col = 0;
+		int row = 0;
 		while (std::getline(file, line)) {
+			row++;
 			
 			// Parse each character
 			for (const auto& i : line) {
+				col++;
+
+				if (i == '#') {
+					// Flip bool for alternating checker pattern
+					m_altColors = (row % 2) ^ (col % 2);
+				}
 
 				// 0 is blank space
 				if (i != '0') {
@@ -113,10 +121,8 @@ public:
 
 				// Increment position
 				m_position.x += mapComponentDimensions;
-			}
 
-			// Flip bool for alternating checker pattern
-			m_altColors = !m_altColors;
+			}
 
 			// New row, set position to 0
 			m_position.x = 0;

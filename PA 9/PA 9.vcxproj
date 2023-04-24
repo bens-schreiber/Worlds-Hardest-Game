@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameDependency.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerDependency.cpp" />
   </ItemGroup>
@@ -136,7 +135,6 @@
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="GameDependency.hpp" />
     <ClInclude Include="Interface.hpp" />
     <ClInclude Include="LinearBall.hpp" />
     <ClInclude Include="Entity.hpp" />

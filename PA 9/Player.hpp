@@ -18,6 +18,7 @@ public:
 	bool canMoveLeft = true;
 	bool canMoveUp = true;
 	bool canMoveDown = true;
+	bool levelCompleted = false;
 
 	// Initialize player with spawnpoint (0,0)
 	// X,Y velocity: playerSpeed
