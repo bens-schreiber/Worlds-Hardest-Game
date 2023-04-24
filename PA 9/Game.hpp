@@ -1,22 +1,28 @@
 #pragma once
 #include <deque>
-#include "FrameListenable.hpp"
-#include "Player.hpp"
-#include "PlayerCollidable.hpp"
-#include "Map.hpp"
 #include "MapFactory.hpp"
 #include "Interface.hpp"
+
 class Game : public FrameListenable {
 
 	Player m_player = Player();
 
 	std::deque<FrameListenable*> m_frameListenables = {};
 
-	Map m_map = MapFactory(m_frameListenables).mapFromFile();
+	std::deque<std::string> m_levels = {
+		"tutorial1.whg",
+		"tutorial2.whg",
+		"level1.whg"
+	};
+
+	Map m_map;
 
 public:
 
 	void initialize() {
+
+		// Grab the first map
+		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels.front());
 
 		// Create a player entity to be the main controllable actor of the game.
 		// The player is dependency injected into the PlayerCollideable interface
@@ -42,6 +48,17 @@ public:
 			i->draw();
 		}
 		m_player.draw();
+	}
+
+	void nextLevel() {
+		m_levels.pop_front();
+
+		// Clear listenables
+		for (auto i : m_frameListenables) {
+			delete i;
+		}
+
+		MapFactory(m_frameListenables).mapFromFile(m_levels.front());
 	}
 
 };

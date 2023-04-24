@@ -4,7 +4,6 @@
 #include <string>
 #include <map>
 #include <deque>
-#include "consts.hpp"
 #include "LinearBall.hpp"
 #include "Map.hpp"
 #include "Endzone.hpp"
@@ -41,7 +40,7 @@ class MapFactory  {
 	// Add the ball to the frame listenables and the entity collision list
 	void createXBall(bool movingRight) {
 
-		Vector2 velocity = { movingRight ? 5 : -5, 0 };
+		Vector2 velocity = { movingRight ? 5.0f : -5.0f, 0.0f };
 		// TODO: don't hardcode ball bounds
 		auto b = new LinearBall(
 			{m_position.x, m_position.y + ballRadius + ballRadiusOutline}, 
@@ -71,7 +70,7 @@ class MapFactory  {
 		case '$':
 			return safeMapComponent();
 		case '%':
-			m_frameListenables.push_back(new Endzone(m_position));
+			m_frameListenables.push_back(new Endzone());
 			return safeMapComponent();
 		case 'R':
 			createXBall(true);
@@ -90,11 +89,11 @@ public:
 		: m_frameListenables(frameListenables) {}
 
 	// Creates a map from a .whg file
-	Map mapFromFile() {
+	Map mapFromFile(std::string fileLocation) {
 
 		// Open file
 		std::fstream file;
-		file.open("level1.whg", std::ios::in);
+		file.open(fileLocation, std::ios::in);
 		
 		// Parse each line
 		std::string line;

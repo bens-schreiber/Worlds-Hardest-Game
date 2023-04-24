@@ -1,5 +1,4 @@
 #pragma once
-#include "Player.hpp"
 #include "PlayerDependency.hpp"
 
 // Interface for dealing with player collisions

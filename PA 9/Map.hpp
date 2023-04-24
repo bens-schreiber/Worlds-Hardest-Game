@@ -2,9 +2,7 @@
 #include <deque>
 #include <iostream>
 #include "consts.hpp"
-#include "raylib.h"
 #include "PlayerCollidable.hpp"
-#include "FrameListenable.hpp"
 
 struct MapComponent {
 	friend class Map;

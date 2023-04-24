@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Entity.hpp"
 #include "consts.hpp"
-#include "raylib.h"
 #include "PlayerCollidable.hpp"
 
 // Ball capable of moving linearly along the X or Y

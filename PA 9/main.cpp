@@ -1,7 +1,7 @@
 
 #include "raylib.h"
 #include "consts.hpp"
-#include "Game.hpp"
+#include "GameDependency.hpp"
 
 int main(void)
 {
@@ -14,6 +14,7 @@ int main(void)
 
     // List of all drawable and updateable entities 
     Game g;
+    GameDependency::setGame(&g);
     g.initialize();
 
     while (!WindowShouldClose())   
