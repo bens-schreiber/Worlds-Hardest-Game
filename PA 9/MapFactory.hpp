@@ -25,7 +25,7 @@ class MapFactory  {
 
 	// checkered square
 	MapComponent basicMapComponent() {
-		MapComponent c = { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions},  m_altColors ? mapCheckerColor : RAYWHITE };
+		MapComponent c = { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions},  ((int) (m_position.x / 50) % 2) ^ ((int) (m_position.y / 50) % 2) ? mapCheckerColor : RAYWHITE};
 		return c;
 	}
 
