@@ -13,7 +13,7 @@ public:
 	void draw()
 	{
 		DrawRectangle(0, 0, screenWidth, interfaceBarHeight, BLACK);
-
+		 
 		std::stringstream ss;
 		ss << "FAILS: " << player().getDeaths();
 		DrawText(ss.str().c_str(), 30, 10, 50, WHITE);
