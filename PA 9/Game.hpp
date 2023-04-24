@@ -1,5 +1,6 @@
 #pragma once
 #include <deque>
+#include <vector>
 #include "MapFactory.hpp"
 #include "Interface.hpp"
 
@@ -11,8 +12,7 @@ class Game : public FrameListenable {
 
 	std::deque<FrameListenable*> m_frameListenables = {};
 
-	int m_levelIndex = 0;
-	std::string m_levels[3] = {
+	std::vector<std::string> m_levels = {
 		"tutorial1.whg",
 		"tutorial2.whg",
 		"level1.whg"
@@ -29,7 +29,7 @@ public:
 		PlayerDependency::setPlayer(&m_player);
 
 		// Grab the first map
-		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_levelIndex]);
+		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[0]);
 
 		m_frameListenables.push_back(new Interface());
 
@@ -68,7 +68,8 @@ public:
 		}
 
 		m_frameListenables = { new Interface() };
-		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_levelIndex++]);
+		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_player.getLevel()]);
+		m_player.incrementLevel(m_levels.size());
 		m_player.setSpawnPoint(m_map.getSpawnpoint());
 	}
 };

@@ -8,6 +8,7 @@
 class Player : public Entity, public MapCollidable {
 
 	int m_deaths = 0;
+	int m_level = 0;
 	Vector2 m_spawnpoint;
 	Rectangle m_rectangle;
 
@@ -136,5 +137,14 @@ public:
 
 	void incrementDeaths() {
 		m_deaths++;
+	}
+
+	void incrementLevel(int maxLevel) {
+		m_level++;
+		m_level %= maxLevel;
+	}
+
+	int getLevel() {
+		return m_level;
 	}
 };
