@@ -40,9 +40,10 @@ class MapFactory  {
 		Vector2 velocity = { movingRight ? 5.0f : -5.0f, 0.0f };
 		// TODO: don't hardcode ball bounds
 		auto b = new LinearBall(
-			{m_position.x, m_position.y + ballRadius + ballRadiusOutline}, 
+			{m_position.x + ballRadius + ballRadiusOutline, m_position.y + ballRadius + ballRadiusOutline}, 
 			velocity,
-			{ mapComponentDimensions * 4, mapComponentDimensions * 12 });
+			{ 0, screenWidth});
+		m_map.m_collidables.push_back(b);
 		m_frameListenables.push_back(b);
 	}
 

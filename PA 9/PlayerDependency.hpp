@@ -17,4 +17,8 @@ protected:
 	Player& player() {
 		return *m_player;
 	}
+
+	Player* playerPointer() {
+		return m_player;
+	}
 };

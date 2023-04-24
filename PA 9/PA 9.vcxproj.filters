@@ -80,6 +80,9 @@
     <ClInclude Include="Endzone.hpp">
       <Filter>Header Files\FrameListenables\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="MapCollidable.hpp">
+      <Filter>Header Files\Abstract</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">

@@ -1,41 +1,43 @@
 #pragma once
 
-#include "raylib.h"
+#include "MapCollidable.hpp"
 #include "Entity.hpp"
 #include "consts.hpp"
 
 // Main player of the game. Moveable via WASD keys.
-class Player : public Entity {
+class Player : public Entity, public MapCollidable {
 
 	int m_deaths = 0;
 	Vector2 m_spawnpoint;
 	Rectangle m_rectangle;
-
-public:
 
 	// Movement locks for map behavior
 	bool canMoveRight = true;
 	bool canMoveLeft = true;
 	bool canMoveUp = true;
 	bool canMoveDown = true;
+
+public:
+
 	bool levelCompleted = false;
 
 	// Initialize player with spawnpoint (0,0)
 	// X,Y velocity: playerSpeed
 	// Rectangle: playerDimensions x playerDimensions
-	Player() : Entity(
+	 Player() : Entity(
 		{ (screenWidth / 2)+1 ,(screenHeight / 2)+1 },
 		{ playerSpeed,playerSpeed }),
 		m_rectangle({ (screenWidth / 2)+1,(screenHeight / 2)+1, playerDimensions, playerDimensions }),
 		m_spawnpoint({ (screenWidth / 2)+1,(screenHeight / 2)+1 })
 	{}
 
-	void resetMovement() {
-		canMoveRight = false;
-		canMoveLeft = false;
-		canMoveUp = false;
-		canMoveDown = false;
-	}
+	 // Reset locks
+	 void resetMovement() {
+		 canMoveRight = false;
+		 canMoveLeft = false;
+		 canMoveUp = false;
+		 canMoveDown = false;
+	 }
 
 	void draw() {
 
@@ -64,6 +66,53 @@ public:
 		// Set the player rectangle position
 		m_rectangle.x = m_position.x;
 		m_rectangle.y = m_position.y;
+	}
+	void handleMapOutOfBounds() {
+	}
+
+
+	// Check every single component of the map against the player.
+	// If the player can make a movement (UP, DOWN, RIGHT, LEFT) in the next frame (+ velocity) enable the movement
+	// Else, the movement is already false.
+	bool checkMapCollision(Rectangle rect) {
+
+		if (!canMoveUp && CheckCollisionRecs({
+			m_rectangle.x,
+			m_rectangle.y - m_velocity.y - m_rectangle.height,
+			m_rectangle.width,
+			m_rectangle.height
+			}, rect)) {
+			canMoveUp = true;
+		}
+
+		if (!canMoveDown && CheckCollisionRecs({
+			m_rectangle.x,
+			m_rectangle.y + m_velocity.y + m_rectangle.height,
+			m_rectangle.width,
+			m_rectangle.height
+			}, rect)) {
+			canMoveDown = true;
+		}
+
+		if (!canMoveRight && CheckCollisionRecs({
+			m_rectangle.x + m_velocity.x + m_rectangle.width,
+			m_rectangle.y,
+			m_rectangle.width,
+			m_rectangle.height
+			}, rect)) {
+			canMoveRight = true;
+		}
+
+		if (!canMoveLeft && CheckCollisionRecs({
+			m_rectangle.x - m_velocity.x - m_rectangle.width,
+			m_rectangle.y,
+			m_rectangle.width,
+			m_rectangle.height
+			}, rect)) {
+			canMoveLeft = true;
+		}
+
+		return false;
 	}
 
 	// Bring the player back to the spawnpoint

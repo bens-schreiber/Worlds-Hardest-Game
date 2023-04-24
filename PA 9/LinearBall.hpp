@@ -1,10 +1,11 @@
 #pragma once
 
 #include "consts.hpp"
+#include "MapCollidable.hpp"
 #include "PlayerCollidable.hpp"
 
 // Ball capable of moving linearly along the X or Y
-class LinearBall : public Entity, PlayerCollidable
+class LinearBall : public Entity, public MapCollidable, PlayerCollidable
 {
 
 	Vector2 m_boundsX;	// x lower, y higher
@@ -33,23 +34,6 @@ public:
 		m_position.x += m_velocity.x;
 		m_position.y += m_velocity.y;
 
-		if (m_position.y >= m_boundsY.y)
-		{
-			flipVelocityY();
-		}
-		if (m_position.y <= m_boundsY.x)
-		{
-			flipVelocityY();
-		}
-		if (m_position.x >= m_boundsX.y)
-		{
-			flipVelocityX();
-		}
-		if (m_position.x <= m_boundsX.x)
-		{
-			flipVelocityX();
-		}
-
 		handlePlayerCollision();
 	}
 	void handlePlayerCollision(Rectangle rect = {}) {
@@ -60,5 +44,13 @@ public:
 			player().resetPosition();
 			player().incrementDeaths();
 		}
+	}
+
+	bool checkMapCollision(Rectangle rect = {}) {
+		return CheckCollisionCircleRec({ m_position.x, m_position.y }, 0, rect);
+	}
+
+	void handleMapOutOfBounds() {
+		flipVelocityX();
 	}
 };

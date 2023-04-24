@@ -24,12 +24,12 @@ public:
 
 	void initialize() {
 
-		// Grab the first map
-		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_levelIndex]);
-
 		// Create a player entity to be the main controllable actor of the game.
 		// The player is dependency injected into the PlayerCollideable interface
 		PlayerDependency::setPlayer(&m_player);
+
+		// Grab the first map
+		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_levelIndex]);
 
 		m_frameListenables.push_back(new Interface());
 
