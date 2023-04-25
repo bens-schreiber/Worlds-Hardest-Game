@@ -3,6 +3,8 @@
 #include "PlayerDependency.hpp"
 #include <sstream>
 
+// Overlay for the game
+// Displays fails and levels
 class Interface : public FrameListenable, PlayerDependency
 {
 public:

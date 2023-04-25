@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header Files\Abstract">
       <UniqueIdentifier>{8e588d93-6e8b-4781-a173-20e07a1d71b7}</UniqueIdentifier>
     </Filter>
@@ -28,14 +24,21 @@
     <Filter Include="Header Files\FrameListenables\Map">
       <UniqueIdentifier>{9fa6f7fc-ad18-46e1-8ff1-7a8d9f1b72dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\tutorial">
+    <Filter Include="Header Files\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Resource Files\tutorial">
       <UniqueIdentifier>{422bbf63-6373-4bbc-8254-6544e1663328}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\level">
+    <Filter Include="Header Files\Resource Files\level">
       <UniqueIdentifier>{590b82c4-12d7-4b35-a433-19c458da149c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\tests">
+    <Filter Include="Header Files\Resource Files\tests">
       <UniqueIdentifier>{54a268f3-a9e1-49ba-b941-2c2608a7c3d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameListenables\Sockets">
+      <UniqueIdentifier>{33e84990-20ac-4d3a-9265-3177ad865e3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +46,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerDependency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostPlayers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,37 +98,43 @@
     <ClInclude Include="AutomatedPlayer.hpp">
       <Filter>Header Files\FrameListenables\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="client.hpp">
+      <Filter>Header Files\FrameListenables\Sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostPlayers.hpp">
+      <Filter>Header Files\FrameListenables\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
-      <Filter>Resource Files</Filter>
+      <Filter>Header Files\Resource Files</Filter>
     </None>
     <None Include="tutorial1.whg">
-      <Filter>Resource Files\tutorial</Filter>
+      <Filter>Header Files\Resource Files\tutorial</Filter>
     </None>
     <None Include="tutorial2.whg">
-      <Filter>Resource Files\tutorial</Filter>
+      <Filter>Header Files\Resource Files\tutorial</Filter>
     </None>
     <None Include="level1.whg">
-      <Filter>Resource Files\level</Filter>
+      <Filter>Header Files\Resource Files\level</Filter>
     </None>
     <None Include="level2.whg">
-      <Filter>Resource Files\level</Filter>
+      <Filter>Header Files\Resource Files\level</Filter>
     </None>
     <None Include="test1.whgt">
-      <Filter>Resource Files\tests</Filter>
+      <Filter>Header Files\Resource Files\tests</Filter>
     </None>
     <None Include="test3.whgt">
-      <Filter>Resource Files\tests</Filter>
+      <Filter>Header Files\Resource Files\tests</Filter>
     </None>
     <None Include="test2.whgt">
-      <Filter>Resource Files\tests</Filter>
+      <Filter>Header Files\Resource Files\tests</Filter>
     </None>
     <None Include="test4.whgt">
-      <Filter>Resource Files\tests</Filter>
+      <Filter>Header Files\Resource Files\tests</Filter>
     </None>
     <None Include="test5.whgt">
-      <Filter>Resource Files\tests</Filter>
+      <Filter>Header Files\Resource Files\tests</Filter>
     </None>
   </ItemGroup>
 </Project>

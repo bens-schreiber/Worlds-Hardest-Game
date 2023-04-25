@@ -5,15 +5,24 @@
 #include "consts.hpp"
 
 // Main player of the game. Moveable via WASD keys.
+// Injected into a singleton, grabbable via inheriting PlayerDependency
 class Player : public Entity, public MapCollidable {
 
 protected:
+
 	int m_deaths = 0;
+
+	// The current level the player is on
 	int m_level = 0;
+
+	// The spawnpoint the player will be reset at
+	// Should be set after creating a map
 	Vector2 m_spawnpoint;
+
+	// Body
 	Rectangle m_rectangle;
 
-	// Movement locks for map behavior
+	// Movement locks for map collision
 	bool canMoveRight = true;
 	bool canMoveLeft = true;
 	bool canMoveUp = true;
@@ -21,6 +30,7 @@ protected:
 
 public:
 
+	// Determines if the player should go on to the next level or not
 	bool levelCompleted = false;
 
 	// Initialize player with spawnpoint (0,0)
@@ -33,7 +43,7 @@ public:
 		m_spawnpoint({ (screenWidth / 2)+1,(screenHeight / 2)+1 })
 	{}
 
-	 // Reset locks
+	 // Reset movement locks
 	 void resetMovement() {
 		 canMoveRight = false;
 		 canMoveLeft = false;
@@ -41,6 +51,7 @@ public:
 		 canMoveDown = false;
 	 }
 
+	// Draw the player body
 	void draw() {
 
 		// BACKGROUND RECTANGLE
@@ -56,6 +67,7 @@ public:
 	}
 
 
+	// Update movement via WASD keys by the vector velocity
 	void update() {
 
 		// CONTROLS
@@ -115,20 +127,16 @@ public:
 	}
 
 	// Handled in checkMapCollision
-	void handleMapOutOfBounds() {
-	}
+	void handleMapOutOfBounds() {}
 
 	// Bring the player back to the spawnpoint
-	void resetPosition() {
-		m_position = m_spawnpoint;
-	}
+	void resetPosition() { m_position = m_spawnpoint; }
 
 	void setSpawnPoint(Vector2 spawnpoint) {
 		m_position = spawnpoint;
 		m_spawnpoint = spawnpoint;
 	}
 
-	// Return the player rectangle for collison calculations
 	const Rectangle& getRectangle() const {
 		return m_rectangle;
 	}

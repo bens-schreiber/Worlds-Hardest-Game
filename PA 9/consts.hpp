@@ -31,3 +31,8 @@
 
 // tests
 #define testDuration 3
+
+// ghost player
+#define ghostPlayerDimensions playerDimensions + playerBorderSize
+#define ghostPlayerTransparency 0.20f
+#define ghostPlayerColor ColorAlpha(BLACK, ghostPlayerTransparency)

@@ -1,6 +1,3 @@
-
-#include "raylib.h"
-#include "consts.hpp"
 #include "Game.hpp"
 
 int main(void)
@@ -12,9 +9,10 @@ int main(void)
     // Set our game to run at 60 frames-per-second
     SetTargetFPS(60);
 
+
     // List of all drawable and updateable entities 
     Game g;
-    g.initialize();
+    g.useGameLevels();
 
     while (!WindowShouldClose())   
     {
@@ -31,8 +29,8 @@ int main(void)
 
         EndDrawing();
     }
-
-    CloseWindow();        
+    
+    CloseWindow();
 
     return 0;
 }
