@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <deque>
+#include <vector>
 #include "Map.hpp"
 #include "LinearBall.hpp"
 #include "Endzone.hpp"
@@ -12,7 +12,7 @@
 class MapFactory  {
 
 	// List of frame listenables that the map can add to
-	std::deque<FrameListenable*>& m_frameListenables;
+	std::vector<FrameListenable*>& m_frameListenables;
 
 	// Map to be build by factory method
 	Map m_map;
@@ -121,7 +121,7 @@ class MapFactory  {
 
 public:
 
-	MapFactory(std::deque<FrameListenable*>& frameListenables) 
+	MapFactory(std::vector<FrameListenable*>& frameListenables) 
 		: m_frameListenables(frameListenables) {}
 
 	// Creates a map from a .whg or .whgt file
