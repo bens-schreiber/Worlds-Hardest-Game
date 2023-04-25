@@ -11,10 +11,11 @@
 
 class Game : public FrameListenable {
 
+	// The player to be interacting with the game.
 	Player* m_player;
 
 	// game map
-	Map m_map;
+	Map *m_map;
 
 	// All drawable and updateable objects
 	std::vector<FrameListenable*> m_frameListenables = {};
@@ -46,7 +47,6 @@ public:
 
 	Game() = default;
 
-
 	~Game() {
 
 		// Delete player dependency
@@ -73,10 +73,10 @@ public:
 
 		// Create the game map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[0]);
-		m_frameListenables.insert(m_frameListenables.begin(), &m_map);
+		m_frameListenables.insert(m_frameListenables.begin(), m_map);
 
 		// Set the players spawnpoint to the new maps spawnpoint
-		m_player->setSpawnPoint(m_map.getSpawnpoint());
+		m_player->setSpawnPoint(m_map->getSpawnpoint());
 	}
 
 	void useTestLevels() {
@@ -93,7 +93,7 @@ public:
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_testLevels[0]);
 
 		// Set the players spawnpoint to the new maps spawnpoint
-		m_player->setSpawnPoint(m_map.getSpawnpoint());
+		m_player->setSpawnPoint(m_map->getSpawnpoint());
 
 		// Finish level after testDuration seconds
 		m_testRunner = std::thread([&]() {
@@ -143,7 +143,10 @@ public:
 
 		// Create the next map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_player->getLevel()]);
+		delete m_frameListenables[0];
+		m_frameListenables[0] = m_map;
+
 		// Set spawnpoint to the maps spawnpoint
-		m_player->setSpawnPoint(m_map.getSpawnpoint());
+		m_player->setSpawnPoint(m_map->getSpawnpoint());
 	}
 };

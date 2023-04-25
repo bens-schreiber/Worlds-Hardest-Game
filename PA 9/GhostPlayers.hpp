@@ -1,11 +1,16 @@
 #include "client.hpp"
 #include "PlayerDependency.hpp"
+
+// Manages a singleton SocketClient
+// Draws all other connected players
 class GhostPlayers : public FrameListenable, PlayerDependency {
 
 	// Connection to the server
 	static SocketClient* m_socketClient;
-	std::vector<Coordinate> m_cachedPlayers;
 
+	// When in the middle of updating players (mutex lock enabled), we still need to draw players each frame.
+	// Therefore, player coordinates are cached here incase of that scenario
+	std::vector<Coordinate> m_cachedPlayers;
 
 public:
 
@@ -17,6 +22,7 @@ public:
 		}
 	}
 
+	// Stop connection
 	~GhostPlayers() {
 		m_socketClient->stopClient();
 	}
@@ -32,11 +38,11 @@ public:
 	// Draw the other players playing the game from the socket connection
 	void draw() {
 
-		// Update position for socket client
+		// Update level and position for socket client
 		m_socketClient->position = { player().getPosition().x , player().getPosition().y};
 		m_socketClient->level = player().getLevel();
 
-		// Lock the mtx and draw if possible
+		// Mutex will be locked if the connected players list is being updated.
 		if (m_socketClient->mtx.try_lock()) {
 			// Cache the connected players incase of mutex lock
 			m_cachedPlayers = m_socketClient->connectedPlayers;
@@ -47,7 +53,7 @@ public:
 			return;
 		}
 
-		// Draw cached if mtx is locked
+		// Draw using cached if mtx is locked
 		for (const auto& i : m_cachedPlayers) drawGhost(i);
 	}
 };

@@ -1,5 +1,7 @@
 #pragma once
 #include "Player.hpp"
+
+// Player controllable via calling methods instead of WASD keys.
 class AutomatedPlayer : public Player {
 
 public:
@@ -12,6 +14,7 @@ public:
 		m_rectangle.y = m_position.y;
 	}
 
+	// Turn a char WASD into movement
 	void move(char i) {
 		switch (i) {
 		case 'W': W(); break;

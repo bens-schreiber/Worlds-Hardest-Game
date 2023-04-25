@@ -74,7 +74,7 @@ void SocketClient::clientThreadFunc() {
                     connectedPlayers.clear();
                 }
                 else {
-                    SocketClientHelper::parseJson(buffer, connectedPlayers);
+                    SocketClientHelper::parseCsv(buffer, connectedPlayers);
                 }
                 mtx.unlock();
             }
