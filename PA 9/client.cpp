@@ -48,7 +48,7 @@ void SocketClient::clientThreadFunc() {
 
             // new message
             ss.str("");
-            ss << position.x << "," << position.y;
+            ss << level << "," << position.x << "," << position.y;
 
             // send position message to the server
             send(clientSocket, ss.str().c_str(), ss.str().size(), 0);
@@ -68,7 +68,12 @@ void SocketClient::clientThreadFunc() {
 
             // parse response
             if (mtx.try_lock()) {
-                SocketClientHelper::parseJson(buffer, connectedPlayers);
+                if (buffer == "NULL") {
+                    connectedPlayers = {};
+                }
+                else {
+                    SocketClientHelper::parseJson(buffer, connectedPlayers);
+                }
                 mtx.unlock();
             }
         }

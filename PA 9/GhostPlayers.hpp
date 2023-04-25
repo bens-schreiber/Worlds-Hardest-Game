@@ -30,6 +30,7 @@ public:
 
 		// Update position for socket client
 		m_socketClient->position = { player().getPosition().x , player().getPosition().y};
+		m_socketClient->level = player().getLevel();
 
 		// Lock the mtx and draw if possible
 		if (m_socketClient->mtx.try_lock()) {

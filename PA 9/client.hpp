@@ -43,6 +43,7 @@ public:
 
     std::vector<Coordinate> connectedPlayers = {};
     Coordinate position = { 0,0 };
+    int level = 0;
     std::mutex mtx;
 
     SocketClient();
