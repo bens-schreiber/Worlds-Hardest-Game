@@ -17,6 +17,10 @@ public:
 		}
 	}
 
+	~GhostPlayers() {
+		m_socketClient->stopClient();
+	}
+
 	void update() {}
 
 	void drawGhost(Coordinate i) {
