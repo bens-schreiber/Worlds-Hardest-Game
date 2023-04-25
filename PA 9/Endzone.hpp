@@ -7,7 +7,7 @@
 class Endzone : public Entity, PlayerCollidable {
 
 	// Body
-	Rectangle m_rect;
+	Rectangle m_rect = { 0,0 };
 
 public:
 
