@@ -62,36 +62,45 @@ class MapFactory  {
 	MapComponent createMapComponent(const char& i) {
 		switch (i) {
 
-		case 'T':
-		case '@':
-			// Spawn in the middle of the square
-			map->m_spawnpoint = {
-				m_position.x + (playerDimensions) / 2,
-				m_position.y + (playerDimensions) / 2 
-			};
-			return safeMapComponent();
-		case '#':
-			return basicMapComponent();
-		case '$':
-			return safeMapComponent();
-		case '%':
-			auto c = safeMapComponent();
-			m_frameListenables.push_back(new Endzone(c.rectangle));
-			return c;
-		case 'R':
-			createXBall(true);
-			return basicMapComponent();
-		case 'L':
-			createXBall(false);
-			return basicMapComponent();
-		case 'U':
-			createYBall(true);
-			return basicMapComponent();
-		case 'D':
-			createYBall(false);
-			return basicMapComponent();
-		default:
-			return basicMapComponent();
+			//case 'T':
+			case '@': {
+				// Spawn in the middle of the square
+				map->m_spawnpoint = {
+					m_position.x + (playerDimensions) / 2,
+					m_position.y + (playerDimensions) / 2
+				};
+				return safeMapComponent();
+			}
+			case '#': {
+				return basicMapComponent();
+			}
+			case '$': {
+				return safeMapComponent();
+			}
+			case '%': {
+				MapComponent c = safeMapComponent();
+				m_frameListenables.push_back(new Endzone(c.rectangle));
+				return c;
+			}
+			case 'R': {
+				createXBall(true);
+				return basicMapComponent();
+			}
+			case 'L': {
+				createXBall(false);
+				return basicMapComponent();
+			}
+			case 'U': {
+				createYBall(true);
+				return basicMapComponent();
+			}
+			case 'D': {
+				createYBall(false);
+				return basicMapComponent();
+			}
+			default: {
+				return basicMapComponent();
+			}
 		}
 	}
 
