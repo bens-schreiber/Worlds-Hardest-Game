@@ -31,3 +31,9 @@
 
 // tests
 #define testDuration 3
+
+// networking
+#define ghostPlayerDimensions playerDimensions + playerBorderSize
+#define ghostPlayerTransparency 0.40f
+#define ghostPlayerColor ColorAlpha(PURPLE, ghostPlayerTransparency)
+#define ghostPlayerBorderColor ColorAlpha(BLACK, ghostPlayerTransparency)

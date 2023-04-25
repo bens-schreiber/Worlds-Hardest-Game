@@ -19,6 +19,12 @@ public:
 
 	void update() {}
 
+	void drawGhost(Coordinate i) {
+
+		// RECTANGLE
+		DrawRectangle(i.x, i.y, ghostPlayerDimensions, ghostPlayerDimensions, ghostPlayerColor);
+	}
+
 	// Draw the other players playing the game from the socket connection
 	void draw() {
 
@@ -30,17 +36,13 @@ public:
 			// Cache the connected players incase of mutex lock
 			m_cachedPlayers = m_socketClient->connectedPlayers;
 
-			for (const auto& i : m_socketClient->connectedPlayers) {
-				DrawRectangle(i.x, i.y, playerDimensions, playerDimensions, PURPLE);
-			}
+			for (const auto& i : m_socketClient->connectedPlayers) drawGhost(i);
 
 			m_socketClient->mtx.unlock();
 			return;
 		}
 
 		// Draw cached if mtx is locked
-		for (const auto& i : m_cachedPlayers) {
-			DrawRectangle(i.x, i.y, playerDimensions, playerDimensions, PURPLE);
-		}
+		for (const auto& i : m_cachedPlayers) drawGhost(i);
 	}
 };

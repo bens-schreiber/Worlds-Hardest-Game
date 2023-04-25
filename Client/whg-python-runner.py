@@ -8,8 +8,9 @@ PORT = 8080
 
 # Define a dictionary to store IP addresses to coordinates mapping
 # Has dummy data so there is always something to respond with
+# TODO: NOSQL database
 coordinates_map = {
-    "X": (-100,-100)
+    "X": (900,354)
 }
 
 def handle_client_connection(client_socket, client_addr):
