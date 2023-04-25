@@ -68,8 +68,10 @@ void SocketClient::clientThreadFunc() {
 
             // parse response
             if (mtx.try_lock()) {
-                if (buffer == "NULL") {
-                    connectedPlayers = {};
+
+                // No data
+                if (buffer[0] == 'N') {
+                    connectedPlayers.clear();
                 }
                 else {
                     SocketClientHelper::parseJson(buffer, connectedPlayers);

@@ -34,6 +34,5 @@
 
 // networking
 #define ghostPlayerDimensions playerDimensions + playerBorderSize
-#define ghostPlayerTransparency 0.40f
-#define ghostPlayerColor ColorAlpha(PURPLE, ghostPlayerTransparency)
-#define ghostPlayerBorderColor ColorAlpha(BLACK, ghostPlayerTransparency)
+#define ghostPlayerTransparency 0.20f
+#define ghostPlayerColor ColorAlpha(BLACK, ghostPlayerTransparency)

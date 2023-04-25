@@ -8,25 +8,34 @@ PORT = 8080
 # Define a dictionary to store level names to coordinates mapping
 # Has dummy data so there is always something to respond with
 # TODO: NOSQL database
-coordinates_map = {
-    0: {
-        "0000": (900,354),
-    }
-}
+level_port_coordinates_map = {}
 
+"""
+Deletes the client from the level port coordinates map
+"""
 def prune_client(client_addr) -> None:
-    # Delete the client's coordinates from dictionary if port matches
-    for level in coordinates_map:
-        if str(client_addr[1]) in coordinates_map[level]:
-            del coordinates_map[level][str(client_addr[1])]
 
+    # Check every level for the players previous coordinates
+    for level in level_port_coordinates_map:
+        if client_addr[1] in level_port_coordinates_map[level]:
+            del level_port_coordinates_map[level][client_addr[1]]
+            break
+
+"""
+When the client disconnects, (denoted by no value returned in data) prune them from the map
+"""
 def handle_client_disconnect(data, client_addr) -> bool:
     if not data:
         # Break the loop if no data received
         print(f"Client disconnected: {client_addr[0]}:{client_addr[1]}")
-        del coordinates_map[client_addr[1]]  # Remove client's coordinates from dictionary
+        prune_client(client_addr)
     return not data
 
+"""
+Recieve data in the form:   level, xPos, yPos
+Store this data in a map filterable by level, and then by the clients port number
+Respond with all coordinate pairs (x,y) in the level
+"""
 def handle_client_connection(client_socket, client_addr) -> None:
     while True:
         try:
@@ -37,34 +46,34 @@ def handle_client_connection(client_socket, client_addr) -> None:
             if (handle_client_disconnect(data, client_addr)):
                 break
 
-            # Log data recieved
-            print(f"Received data from {client_addr[0]}:{client_addr[1]}: {data}")
-
             # Data comes in the form level (int), x (float), y (float)
             # Extract level name and coordinates from data
             level, x, y = map(float, data.split(','))
             level = int(level)
 
-            # Update coordinates_map with the received coordinates
-            if level not in coordinates_map:
+            # Add new level if not already in map
+            if level not in level_port_coordinates_map:
                 prune_client(client_addr)
-                coordinates_map[level] = {client_addr[1] : (x,y)}
+                level_port_coordinates_map[level] = {client_addr[1] : (x,y)}
 
-            # Log stored coordinates
-            print(f"Stored coordinates for {client_addr[0]}: ({x}, {y})")
+            # Remove the clients previous level entries on a new level
+            elif client_addr[1] not in level_port_coordinates_map[level]:
+                prune_client(client_addr)
+            
+            # Update with new coordinates
+            level_port_coordinates_map[level][client_addr[1]] = (x,y)
 
             # Build response with all coordinates except the client's coordinates
             # Limit the response to first 5 coordinates
-            response = " ".join([f"{v[0]},{v[1]}" for k, v in coordinates_map[level].items() if k != client_addr[1]])
-            if (not response):
-                response = "NULL"
+            response = " ".join([f"{v[0]},{v[1]}" for k, v in level_port_coordinates_map[level].items() if k != client_addr[1]])
+            if (len(response) == 0):
+                response = "N"
 
             # Send the response back to the client as a comma-separated list
             client_socket.send(response.encode('utf-8'))
-            print(f"Sent response to {client_addr[0]}:{client_addr[1]}: {response}")
 
         except socket.error as e:
-            print(f"Error occurred: {e}")
+            print(f"Error occurred with {client_addr[0]}:{client_addr[1]} - {e}")
             client_socket.close()
 
             # Delete the client's coordinates from dictionary if port matches
