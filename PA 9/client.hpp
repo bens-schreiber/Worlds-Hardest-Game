@@ -11,6 +11,7 @@
 #define BUFFER_SIZE 1024
 #define SERVER_ADDRESS "127.0.0.1"
 #define PORT_NUMBER 8080
+#define RETRY_CONN_WAIT 5	// (in seconds)
 
 // DISCLAIMER:
 // Winsock2 defines some functions that are also in raylib
@@ -54,6 +55,10 @@ class SocketClient {
     // Function to be called on loop in the thread
     void clientThreadFunc();
 
+    void runClientServer();
+    
+    bool killServer = false;
+
 public:
 
     // All player coordinates sent by the server at any given frame/
@@ -77,6 +82,7 @@ public:
 
     // Begin the server on a seperate detatched thread. Must be closed manually.
     void startClient() {
+        killServer = false;
         // Start a new thread for the client connection
         clientThread = std::thread(&SocketClient::clientThreadFunc, this);
         clientThread.detach(); // Detach the thread so it can run independently

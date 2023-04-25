@@ -1,5 +1,6 @@
 #include "client.hpp"
 #include <WinSock2.h>
+#include <thread>
 
 SocketClient::SocketClient() : clientSocket(INVALID_SOCKET), clientThread() {}
 
@@ -8,13 +9,18 @@ void SocketClient::stopClient() {
     closesocket(clientSocket);
     WSACleanup();
 
-    // Join the client thread if it's joinable
-    if (clientThread.joinable()) {
-        clientThread.join();
-    }
+    killServer = true;
 }
 
 void SocketClient::clientThreadFunc() {
+    while (!killServer) {
+        std::this_thread::sleep_for(std::chrono::seconds(RETRY_CONN_WAIT));
+        std::cout << "Retrying connection to server...\n";
+        runClientServer();
+    }
+}
+
+void SocketClient::runClientServer() {
     {
         WSADATA wsaData;
 
@@ -44,6 +50,8 @@ void SocketClient::clientThreadFunc() {
         char buffer[BUFFER_SIZE];
         std::stringstream ss;
 
+        std::cout << "Connection established to " << SERVER_ADDRESS << ":" << PORT_NUMBER << std::endl;
+
         while (1) {
 
             // new message
@@ -60,6 +68,7 @@ void SocketClient::clientThreadFunc() {
             if (bytesRead == SOCKET_ERROR) {
                 closesocket(clientSocket);
                 WSACleanup();
+                std::cout << "Connection failed. Retrying..." << std::endl;
                 return;
             }
 
