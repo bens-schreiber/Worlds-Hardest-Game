@@ -7,9 +7,9 @@ HOST = '127.0.0.1'
 PORT = 8080
 
 # Define a dictionary to store IP addresses to coordinates mapping
+# Has dummy data so there is always something to respond with
 coordinates_map = {
-    '192.168.1.2': (100, 200),
-    '192.168.1.3': (50, 75),
+    "X": (-100,-100)
 }
 
 def handle_client_connection(client_socket, client_addr):
@@ -20,19 +20,18 @@ def handle_client_connection(client_socket, client_addr):
             if not data:
                 # Break the loop if no data received
                 print(f"Client disconnected: {client_addr[0]}:{client_addr[1]}")
-                del coordinates_map[client_addr[0]] # Remove client's coordinates from dictionary
+                del coordinates_map[client_addr[1]] # Remove client's coordinates from dictionary
                 break
             print(f"Received data from {client_addr[0]}:{client_addr[1]}: {data}")
 
             # Extract coordinates from data
-            x, y = map(int, data.split(','))
-            if client_addr[0] not in coordinates_map: # Check if IP already exists in dictionary
-                coordinates_map[client_addr[0]] = (x, y)
-                print(f"Stored coordinates for {client_addr[0]}: ({x}, {y})")
+            x, y = map(float, data.split(','))
+            coordinates_map[client_addr[1]] = (x, y)
+            print(f"Stored coordinates for {client_addr[0]}: ({x}, {y})")
 
             # Build response with all coordinates except the client's coordinates
             # First 5 only
-            response = ' '.join(f"{coord[0]},{coord[1]}" for ip, coord in islice(coordinates_map.items(), 5) if ip != client_addr[0])
+            response = ' '.join(f"{coord[0]},{coord[1]}" for ip, coord in islice(coordinates_map.items(), 5) if ip != client_addr[1])
 
             # Send the response back to the client as a comma-separated list
             client_socket.send(response.encode('utf-8'))
@@ -41,7 +40,7 @@ def handle_client_connection(client_socket, client_addr):
         except socket.error as e:
             print(f"Error occurred: {e}")
             client_socket.close()
-            del coordinates_map[client_addr[0]] # Remove client's coordinates from dictionary
+            del coordinates_map[client_addr[1]] # Remove client's coordinates from dictionary
             break
 
 

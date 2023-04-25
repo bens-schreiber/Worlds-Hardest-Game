@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <mutex>
 
 #pragma comment(lib, "ws2_32.lib")
 #pragma warning(disable:4996)
@@ -41,8 +42,8 @@ class SocketClient {
 public:
 
     std::vector<Coordinate> connectedPlayers = {};
-    bool mutexLock = false;
     Coordinate position = { 0,0 };
+    std::mutex mtx;
 
     SocketClient();
 

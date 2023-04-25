@@ -43,12 +43,17 @@ void SocketClient::clientThreadFunc() {
 
         char buffer[BUFFER_SIZE];
         std::stringstream ss;
-        ss << "5,3";
-        std::string msg = ss.str();
 
         while (1) {
-            if (mutexLock) continue;
-            send(clientSocket, msg.c_str(), msg.size(), 0);
+
+            // new message
+            ss.str("");
+            ss << position.x << "," << position.y;
+
+            // send position message to the server
+            send(clientSocket, ss.str().c_str(), ss.str().size(), 0);
+
+            // get response
             int bytesRead = recv(clientSocket, buffer, BUFFER_SIZE - 1, 0);
 
             // Failed to get data
@@ -58,11 +63,14 @@ void SocketClient::clientThreadFunc() {
                 return;
             }
 
+            // append a nullchar to end 
             buffer[bytesRead] = '\0';
 
-            SocketClient::mutexLock = true;
-            SocketClientHelper::parseJson(buffer, connectedPlayers);
-            SocketClient::mutexLock = false;
+            // parse response
+            if (mtx.try_lock()) {
+                SocketClientHelper::parseJson(buffer, connectedPlayers);
+                mtx.unlock();
+            }
         }
 
         // Close the client socket
