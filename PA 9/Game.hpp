@@ -136,7 +136,7 @@ public:
 		m_player->levelCompleted = false;
 
 		// Clear listenables
-		for (auto i = m_frameListenables.size() - 1; i > FRAME_LISTENABLES_CONSTANTS; --i) {
+		for (auto i = m_frameListenables.size() - 1; i >= FRAME_LISTENABLES_CONSTANTS; --i) {
 			delete m_frameListenables[i];
 			m_frameListenables.erase(m_frameListenables.begin() + i);
 		}
