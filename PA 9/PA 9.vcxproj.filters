@@ -54,6 +54,9 @@
     <ClCompile Include="GhostPlayers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinearBall.hpp">
@@ -107,6 +110,9 @@
     <ClInclude Include="TrigBall.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Coin.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
@@ -147,6 +153,15 @@
     </None>
     <None Include="level7.whg">
       <Filter>Header Files\Resource Files\level</Filter>
+    </None>
+    <None Include="level6.whg">
+      <Filter>Header Files\Resource Files\level</Filter>
+    </None>
+    <None Include="level4.whg">
+      <Filter>Header Files\Resource Files\level</Filter>
+    </None>
+    <None Include="tutorial3.whg">
+      <Filter>Header Files\Resource Files\tutorial</Filter>
     </None>
   </ItemGroup>
 </Project>
