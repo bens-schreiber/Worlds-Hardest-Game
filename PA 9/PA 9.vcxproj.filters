@@ -136,5 +136,8 @@
     <None Include="test5.whgt">
       <Filter>Header Files\Resource Files\tests</Filter>
     </None>
+    <None Include="level3.whg">
+      <Filter>Header Files\Resource Files\level</Filter>
+    </None>
   </ItemGroup>
 </Project>

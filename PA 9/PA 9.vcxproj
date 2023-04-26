@@ -155,6 +155,7 @@
   <ItemGroup>
     <None Include="level1.whg" />
     <None Include="level2.whg" />
+    <None Include="level3.whg" />
     <None Include="README.md" />
     <None Include="test1.whgt" />
     <None Include="test3.whgt" />
