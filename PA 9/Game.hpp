@@ -7,7 +7,6 @@
 #include "Interface.hpp"
 #include "AutomatedPlayer.hpp"
 #include "GhostPlayers.hpp"
-#define FRAME_LISTENABLES_CONSTANTS 3
 
 class Game : public FrameListenable {
 
@@ -19,6 +18,9 @@ class Game : public FrameListenable {
 
 	// All drawable and updateable objects
 	std::vector<FrameListenable*> m_frameListenables = {};
+
+	// Static listenables that are not deleted every level
+	std::vector<FrameListenable*> m_staticFrameListenables = {};
 
 	// levels to be used
 	std::vector<std::string> m_levels = {};
@@ -52,11 +54,12 @@ public:
 
 	~Game() {
 
-		// Delete player dependency
-		delete m_player;
-
 		// Delete remaining frame listenables
 		for (auto& i : m_frameListenables) {
+			delete i;
+		}
+
+		for (auto& i : m_staticFrameListenables) {
 			delete i;
 		}
 	}
@@ -71,12 +74,11 @@ public:
 		// Set the levels to be the normal game levels
 		m_levels = m_gameLevels;
 
-		// Interface, Map and GhostPlayers will stay in listenables until game ends
-		m_frameListenables = { new Interface(), new GhostPlayers() };
-
-		// Create the game map
+		// Create the game map, populate the listenables
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[0]);
-		m_frameListenables.insert(m_frameListenables.begin(), m_map);
+
+		// Interface and GhostPlayers will stay in listenables until game ends
+		m_staticFrameListenables = { new Interface(), new GhostPlayers(), m_player };
 
 		// Set the players spawnpoint to the new maps spawnpoint
 		m_player->setSpawnPoint(m_map->getSpawnpoint());
@@ -110,15 +112,16 @@ public:
 	// Called every frame
 	void update() {
 		for (const auto& i : m_frameListenables) i->update();
-		m_player->update();
+		for (const auto& i : m_staticFrameListenables) i->update();
 	}
 
 	// called every frame
 	void draw() {
 		for (const auto& i : m_frameListenables) i->draw();
-		m_player->draw();
+		for (const auto& i : m_staticFrameListenables) i->draw();
 
 		// Check for the level to be done
+		// This check must be done in draw to prevent the screen from tearing
 		if (m_player->levelCompleted) {
 			nextLevel();
 			return;
@@ -139,14 +142,12 @@ public:
 		m_player->levelCompleted = false;
 
 		// Clear listenables
-		for (auto i = m_frameListenables.size() - 1; i >= FRAME_LISTENABLES_CONSTANTS; --i) {
-			delete m_frameListenables[i];
-			m_frameListenables.erase(m_frameListenables.begin() + i);
-		}
+		for (auto& i : m_frameListenables) delete i;
+		m_frameListenables.clear();
 
 		// Create the next map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_player->getLevel()]);
-		delete m_frameListenables[0];
+
 		m_frameListenables[0] = m_map;
 
 		// Set spawnpoint to the maps spawnpoint

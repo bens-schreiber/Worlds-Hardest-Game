@@ -183,6 +183,9 @@ public:
 			}
 		}
 
+		// Map should be drawn and updated first in frame listenables
+		m_frameListenables.push_back(map);
+
 		// Process the map contents
 		_mapFromFile(file, line);
 
