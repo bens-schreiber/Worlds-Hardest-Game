@@ -7,7 +7,8 @@
 // Main player of the game. Moveable via WASD keys.
 // Injected into a singleton, grabbable via inheriting PlayerDependency
 class Player : public Entity, public MapCollidable {
-
+	float m_transperency = 1.0f;
+	bool m_dead = false;
 protected:
 
 	int m_deaths = 0;
@@ -54,22 +55,48 @@ public:
 	// Draw the player body
 	void draw() {
 
+		if (m_dead)
+		{
+			m_transperency -= playerFadeoutRate;
+
+			if (m_transperency <= 0)
+			{
+				resetPosition();
+				m_dead = false;
+				m_transperency = 1.0f;
+			}
+			resetMovement();
+		}
+		
 		// BACKGROUND RECTANGLE
 		DrawRectangle(
 			m_position.x - (playerBorderSize/2),
 			m_position.y - (playerBorderSize / 2), 
 			playerDimensions + playerBorderSize, 
-			playerDimensions + playerBorderSize, BLACK
+			playerDimensions + playerBorderSize, ColorAlpha(BLACK, m_transperency)
 		);
 
 		// PLAYER RECTANGLE
-		DrawRectangleRec(m_rectangle, RED);
+		DrawRectangleRec(m_rectangle, ColorAlpha(RED, m_transperency));
+	}
+
+	void killPlayer()
+	{
+		if (m_dead) {
+			return;
+		}
+		m_dead = true;
+
+		m_deaths++;
 	}
 
 
 	// Update movement via WASD keys by the vector velocity
 	void update() {
 
+		if (m_dead) {
+			return;
+		}
 		// CONTROLS
 
 		if (IsKeyDown(KEY_D) && canMoveRight) m_position.x += m_velocity.x;
@@ -130,7 +157,8 @@ public:
 	void handleMapOutOfBounds() {}
 
 	// Bring the player back to the spawnpoint
-	void resetPosition() { m_position = m_spawnpoint; }
+	void resetPosition() {
+		m_position = m_spawnpoint; }
 
 	void setSpawnPoint(Vector2 spawnpoint) {
 		m_position = spawnpoint;
@@ -145,9 +173,7 @@ public:
 		return m_deaths;
 	}
 
-	void incrementDeaths() {
-		m_deaths++;
-	}
+	
 
 	void incrementLevel() {
 		m_level++;

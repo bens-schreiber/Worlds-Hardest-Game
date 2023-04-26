@@ -41,9 +41,11 @@ public:
 		// If the ball and the player collide
 		if (CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
 		{
-			player().resetPosition();
-			player().incrementDeaths();
+
+			player().killPlayer();
+
 		}
+
 	}
 
 	bool checkMapCollision(Rectangle rect = {}) {
