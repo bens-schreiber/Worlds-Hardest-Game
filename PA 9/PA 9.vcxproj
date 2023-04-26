@@ -160,8 +160,8 @@
     <None Include="level2.whg" />
     <None Include="level3.whg" />
     <None Include="level4.whg" />
-    <None Include="level5.whg" />
     <None Include="level6.whg" />
+    <None Include="level5.whg" />
     <None Include="level7.whg" />
     <None Include="README.md" />
     <None Include="test1.whgt" />
