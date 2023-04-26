@@ -65,6 +65,18 @@ class MapFactory  {
 		m_frameListenables.push_back(b);
 	}
 
+	void createTrigBall3() {
+		auto b = new TrigBall(
+			{ m_position.x + ballRadius + ballRadiusOutline,  m_position.y + ballRadius + ballRadiusOutline }, 50, 0.5);
+		auto c = new TrigBall(
+			{ m_position.x + ballRadius + ballRadiusOutline,  m_position.y + ballRadius + ballRadiusOutline }, 100, 0.5);
+		auto d = new TrigBall(
+			{ m_position.x + ballRadius + ballRadiusOutline,  m_position.y + ballRadius + ballRadiusOutline }, 150, 0.5);
+		m_frameListenables.push_back(c);
+		m_frameListenables.push_back(d);
+		m_frameListenables.push_back(b);
+	}
+
 	// Switch based off the char given
 	MapComponent createMapComponent(const char& i) {
 		switch (i) {
@@ -99,6 +111,9 @@ class MapFactory  {
 			return basicMapComponent();
 		case 'C':
 			createTrigBall();
+			return basicMapComponent();
+		case 'H':
+			createTrigBall3();
 			return basicMapComponent();
 		default:
 			return basicMapComponent();
