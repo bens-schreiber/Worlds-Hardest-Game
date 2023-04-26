@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <deque>
+#include <vector>
 #include "Map.hpp"
 #include "LinearBall.hpp"
 #include "Endzone.hpp"
@@ -12,11 +12,11 @@
 // Factory class dedicated to making Map objects
 class MapFactory  {
 
-	// List of frame listenables that the map can add to
-	std::deque<FrameListenable*>& m_frameListenables;
+	// Map the factory will return
+	Map* map = new Map();
 
-	// Map to be build by factory method
-	Map m_map;
+	// List of frame listenables that the map can add to
+	std::vector<FrameListenable*>& m_frameListenables;
 
 	// Position of the cursor in map
 	Vector2 m_position{ mapCenterX, mapCenterY};
@@ -44,7 +44,7 @@ class MapFactory  {
 			{m_position.x + ballRadius + ballRadiusOutline, m_position.y + ballRadius + ballRadiusOutline}, 
 			velocity,
 			{ 0, screenWidth});
-		m_map.m_collidables.push_back(b);
+		map->m_collidables.push_back(b);
 		m_frameListenables.push_back(b);
 	}
 
@@ -55,7 +55,7 @@ class MapFactory  {
 			{ m_position.x + ballRadius + ballRadiusOutline, m_position.y + ballRadius + ballRadiusOutline },
 			velocity,
 			{ 0, screenWidth });
-		m_map.m_collidables.push_back(b);
+		map->m_collidables.push_back(b);
 		m_frameListenables.push_back(b);
 	}
 
@@ -84,7 +84,7 @@ class MapFactory  {
 		case 'T':
 		case '@':
 			// Spawn in the middle of the square
-			m_map.m_spawnpoint = {
+			map->m_spawnpoint = {
 				m_position.x + (playerDimensions) / 2,
 				m_position.y + (playerDimensions) / 2 
 			};
@@ -131,7 +131,7 @@ class MapFactory  {
 
 				// 0 is blank space
 				if (i != '0') {
-					m_map.m_components.push_back(createMapComponent(i));
+					map->m_components.push_back(createMapComponent(i));
 				}
 
 				// Increment position
@@ -146,12 +146,12 @@ class MapFactory  {
 
 public:
 
-	MapFactory(std::deque<FrameListenable*>& frameListenables) 
+	MapFactory(std::vector<FrameListenable*>& frameListenables) 
 		: m_frameListenables(frameListenables) {}
 
 	// Creates a map from a .whg or .whgt file
 	// See readme for file guidelines
-	Map mapFromFile(std::string fileLocation) {
+	Map* mapFromFile(std::string fileLocation) {
 
 		// Open file
 		std::fstream file;
@@ -162,14 +162,14 @@ public:
 
 		// Get the map height
 		std::getline(file, line);
-		m_map.m_height = atoi(line.c_str());
+		map->m_height = atoi(line.c_str());
 
 		// center the map Y
-		m_position.y -= m_map.m_height * mapComponentDimensions / 2;
+		m_position.y -= map->m_height * mapComponentDimensions / 2;
 
 		// map title
 		std::getline(file, line);
-		m_map.m_title = line;
+		map->m_title = line;
 
 		// Determine if the map has automated instructions
 		if (fileLocation.find("whgt") != std::string::npos) {
@@ -179,13 +179,13 @@ public:
 			for (const auto i : line) {
 				// 0 means no instructions 
 				if (i == '0') break;
-				m_map.m_automatedInstructions.push_back(i);
+				map->m_automatedInstructions.push_back(i);
 			}
 		}
 
 		// Process the map contents
 		_mapFromFile(file, line);
 
-		return m_map;
+		return map;
 	}
 };

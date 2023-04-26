@@ -8,6 +8,7 @@
 #define playerSpeed 2.5f
 #define playerDimensions 25.0f
 #define playerBorderSize 10.0f
+#define playerFadeoutRate 0.05f
 
 // balls
 #define ballRadius 15.0f
@@ -31,3 +32,10 @@
 
 // tests
 #define testDuration 3
+
+// ghost player
+#define ghostPlayerDimensions playerDimensions + playerBorderSize
+#define ghostPlayerTransparency 0.20f
+#define ghostPlayerColor ColorAlpha(BLACK, ghostPlayerTransparency)
+
+

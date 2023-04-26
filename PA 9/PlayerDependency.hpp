@@ -7,7 +7,10 @@ class PlayerDependency{
 
 public:
 
-	PlayerDependency() = default;
+	static Player* newPlayer() {
+		m_player = new Player();
+		return m_player;
+	}
 
 	static void setPlayer(Player* player) {
 		m_player = player;

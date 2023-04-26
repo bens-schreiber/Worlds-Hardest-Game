@@ -5,15 +5,25 @@
 #include "consts.hpp"
 
 // Main player of the game. Moveable via WASD keys.
+// Injected into a singleton, grabbable via inheriting PlayerDependency
 class Player : public Entity, public MapCollidable {
-
+	float m_transperency = 1.0f;
+	bool m_dead = false;
 protected:
+
 	int m_deaths = 0;
+
+	// The current level the player is on
 	int m_level = 0;
+
+	// The spawnpoint the player will be reset at
+	// Should be set after creating a map
 	Vector2 m_spawnpoint;
+
+	// Body
 	Rectangle m_rectangle;
 
-	// Movement locks for map behavior
+	// Movement locks for map collision
 	bool canMoveRight = true;
 	bool canMoveLeft = true;
 	bool canMoveUp = true;
@@ -21,6 +31,7 @@ protected:
 
 public:
 
+	// Determines if the player should go on to the next level or not
 	bool levelCompleted = false;
 
 	// Initialize player with spawnpoint (0,0)
@@ -33,7 +44,7 @@ public:
 		m_spawnpoint({ (screenWidth / 2)+1,(screenHeight / 2)+1 })
 	{}
 
-	 // Reset locks
+	 // Reset movement locks
 	 void resetMovement() {
 		 canMoveRight = false;
 		 canMoveLeft = false;
@@ -41,23 +52,51 @@ public:
 		 canMoveDown = false;
 	 }
 
+	// Draw the player body
 	void draw() {
 
+		if (m_dead)
+		{
+			m_transperency -= playerFadeoutRate;
+
+			if (m_transperency <= 0)
+			{
+				m_transperency = 1.0f;
+				resetPosition();
+				m_dead = false;
+			}
+			resetMovement();
+		}
+		
 		// BACKGROUND RECTANGLE
 		DrawRectangle(
 			m_position.x - (playerBorderSize/2),
 			m_position.y - (playerBorderSize / 2), 
 			playerDimensions + playerBorderSize, 
-			playerDimensions + playerBorderSize, BLACK
+			playerDimensions + playerBorderSize, ColorAlpha(BLACK, m_transperency)
 		);
 
 		// PLAYER RECTANGLE
-		DrawRectangleRec(m_rectangle, RED);
+		DrawRectangleRec(m_rectangle, ColorAlpha(RED, m_transperency));
+	}
+
+	void killPlayer()
+	{
+		if (m_dead) {
+			return;
+		}
+		m_dead = true;
+
+		m_deaths++;
 	}
 
 
+	// Update movement via WASD keys by the vector velocity
 	void update() {
 
+		if (m_dead) {
+			return;
+		}
 		// CONTROLS
 
 		if (IsKeyDown(KEY_D) && canMoveRight) m_position.x += m_velocity.x;
@@ -115,12 +154,15 @@ public:
 	}
 
 	// Handled in checkMapCollision
-	void handleMapOutOfBounds() {
-	}
+	void handleMapOutOfBounds() {}
 
 	// Bring the player back to the spawnpoint
 	void resetPosition() {
-		m_position = m_spawnpoint;
+		m_position = m_spawnpoint; 
+
+		// Set the player rectangle position
+		m_rectangle.x = m_position.x;
+		m_rectangle.y = m_position.y;
 	}
 
 	void setSpawnPoint(Vector2 spawnpoint) {
@@ -128,7 +170,6 @@ public:
 		m_spawnpoint = spawnpoint;
 	}
 
-	// Return the player rectangle for collison calculations
 	const Rectangle& getRectangle() const {
 		return m_rectangle;
 	}
@@ -137,9 +178,7 @@ public:
 		return m_deaths;
 	}
 
-	void incrementDeaths() {
-		m_deaths++;
-	}
+	
 
 	void incrementLevel() {
 		m_level++;
