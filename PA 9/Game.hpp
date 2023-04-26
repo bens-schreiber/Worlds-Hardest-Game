@@ -2,15 +2,23 @@
 #include <deque>
 #include <thread>
 #include <vector>
+#include <list>
 #include "MapFactory.hpp"
 #include "Interface.hpp"
 #include "AutomatedPlayer.hpp"
+#include "GhostPlayers.hpp"
+#define FRAME_LISTENABLES_CONSTANTS 3
 
 class Game : public FrameListenable {
 
+	// The player to be interacting with the game.
 	Player* m_player;
 
-	std::deque<FrameListenable*> m_frameListenables = {};
+	// game map
+	Map *m_map;
+
+	// All drawable and updateable objects
+	std::vector<FrameListenable*> m_frameListenables = {};
 
 	// levels to be used
 	std::vector<std::string> m_levels = {};
@@ -32,37 +40,46 @@ class Game : public FrameListenable {
 		"test5.whgt",
 	};
 
+	// Thread for running tests
 	std::thread m_testRunner;
-
-	Map m_map;
 
 public:
 
+	Game() = default;
+
 	~Game() {
+
+		// Delete player dependency
 		delete m_player;
+
+		// Delete remaining frame listenables
+		for (auto& i : m_frameListenables) {
+			delete i;
+		}
 	}
 
-	void initialize() {
+	// Must be run before playing a game
+	void useGameLevels() {
+
+		// Create a player entity to be the main controllable actor of the game.
+		// The player is dependency injected into the PlayerCollideable interface
+		m_player = PlayerDependency::newPlayer();
 
 		// Set the levels to be the normal game levels
 		m_levels = m_gameLevels;
 
-		// Create a player entity to be the main controllable actor of the game.
-		// The player is dependency injected into the PlayerCollideable interface
-		delete m_player;
-		m_player = new Player();
-		PlayerDependency::setPlayer(m_player);
+		// Interface, Map and GhostPlayers will stay in listenables until game ends
+		m_frameListenables = { new Interface(), new GhostPlayers() };
 
-		// Grab the first map
+		// Create the game map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[0]);
-
-		m_frameListenables.push_back(new Interface());
+		m_frameListenables.insert(m_frameListenables.begin(), m_map);
 
 		// Set the players spawnpoint to the new maps spawnpoint
-		m_player->setSpawnPoint(m_map.getSpawnpoint());
+		m_player->setSpawnPoint(m_map->getSpawnpoint());
 	}
 
-	void runTests() {
+	void useTestLevels() {
 
 		// Set the levels to be the test levels
 		m_levels = m_testLevels;
@@ -75,10 +92,8 @@ public:
 		// Grab the first map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_testLevels[0]);
 
-		m_frameListenables.push_back(new Interface());
-
 		// Set the players spawnpoint to the new maps spawnpoint
-		m_player->setSpawnPoint(m_map.getSpawnpoint());
+		m_player->setSpawnPoint(m_map->getSpawnpoint());
 
 		// Finish level after testDuration seconds
 		m_testRunner = std::thread([&]() {
@@ -89,20 +104,25 @@ public:
 		});
 	}
 
+	// Called every frame
 	void update() {
-		m_map.update();
 		for (const auto& i : m_frameListenables) i->update();
 		m_player->update();
 	}
 
+	// called every frame
 	void draw() {
-
-		m_map.draw();
 		for (const auto& i : m_frameListenables) i->draw();
 		m_player->draw();
-		if (m_player->levelCompleted) nextLevel();
+
+		// Check for the level to be done
+		if (m_player->levelCompleted) {
+			nextLevel();
+			return;
+		}
 	}
 
+	// Go to the next level of the map
 	void nextLevel() {
 
 		m_player->incrementLevel();
@@ -116,16 +136,17 @@ public:
 		m_player->levelCompleted = false;
 
 		// Clear listenables
-		for (auto i : m_frameListenables) {
-			delete i;
+		for (auto i = m_frameListenables.size() - 1; i >= FRAME_LISTENABLES_CONSTANTS; --i) {
+			delete m_frameListenables[i];
+			m_frameListenables.erase(m_frameListenables.begin() + i);
 		}
-
-		// Add interface to the listenables
-		m_frameListenables = { new Interface() };
 
 		// Create the next map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_levels[m_player->getLevel()]);
+		delete m_frameListenables[0];
+		m_frameListenables[0] = m_map;
+
 		// Set spawnpoint to the maps spawnpoint
-		m_player->setSpawnPoint(m_map.getSpawnpoint());
+		m_player->setSpawnPoint(m_map->getSpawnpoint());
 	}
 };
