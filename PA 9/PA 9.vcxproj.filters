@@ -107,11 +107,11 @@
     <ClInclude Include="GhostPlayers.hpp">
       <Filter>Header Files\FrameListenables\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="TrigBall.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Coin.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\FrameListenables\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TrigBall.hpp">
+      <Filter>Header Files\FrameListenables\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
