@@ -160,6 +160,5 @@
     <None Include="tutorial3.whg">
       <Filter>Header Files\Resource Files\tutorial</Filter>
     </None>
-    <None Include="README.md" />
   </ItemGroup>
 </Project>

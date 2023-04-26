@@ -163,7 +163,6 @@
     <None Include="level6.whg" />
     <None Include="level5.whg" />
     <None Include="level7.whg" />
-    <None Include="README.md" />
     <None Include="test1.whgt" />
     <None Include="test3.whgt" />
     <None Include="test2.whgt" />
