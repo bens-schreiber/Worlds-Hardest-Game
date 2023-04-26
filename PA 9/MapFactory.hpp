@@ -7,6 +7,7 @@
 #include "Map.hpp"
 #include "LinearBall.hpp"
 #include "Endzone.hpp"
+#include "TrigBall.h"
 
 // Factory class dedicated to making Map objects
 class MapFactory  {
@@ -58,49 +59,49 @@ class MapFactory  {
 		m_frameListenables.push_back(b);
 	}
 
+	void createTrigBall() {
+		auto b = new TrigBall(
+			{ m_position.x + ballRadius + ballRadiusOutline,  m_position.y + ballRadius + ballRadiusOutline}, 100, 0.5);
+		m_frameListenables.push_back(b);
+	}
+
 	// Switch based off the char given
 	MapComponent createMapComponent(const char& i) {
 		switch (i) {
 
-			//case 'T':
-			case '@': {
-				// Spawn in the middle of the square
-				map->m_spawnpoint = {
-					m_position.x + (playerDimensions) / 2,
-					m_position.y + (playerDimensions) / 2
-				};
-				return safeMapComponent();
-			}
-			case '#': {
-				return basicMapComponent();
-			}
-			case '$': {
-				return safeMapComponent();
-			}
-			case '%': {
-				MapComponent c = safeMapComponent();
-				m_frameListenables.push_back(new Endzone(c.rectangle));
-				return c;
-			}
-			case 'R': {
-				createXBall(true);
-				return basicMapComponent();
-			}
-			case 'L': {
-				createXBall(false);
-				return basicMapComponent();
-			}
-			case 'U': {
-				createYBall(true);
-				return basicMapComponent();
-			}
-			case 'D': {
-				createYBall(false);
-				return basicMapComponent();
-			}
-			default: {
-				return basicMapComponent();
-			}
+		case 'T':
+		case '@':
+			// Spawn in the middle of the square
+			m_map.m_spawnpoint = {
+				m_position.x + (playerDimensions) / 2,
+				m_position.y + (playerDimensions) / 2 
+			};
+			return safeMapComponent();
+		case '#':
+			return basicMapComponent();
+		case '$':
+			return safeMapComponent();
+		case '%':
+			auto c = safeMapComponent();
+			m_frameListenables.push_back(new Endzone(c.rectangle));
+			return c;
+		case 'R':
+			createXBall(true);
+			return basicMapComponent();
+		case 'L':
+			createXBall(false);
+			return basicMapComponent();
+		case 'U':
+			createYBall(true);
+			return basicMapComponent();
+		case 'D':
+			createYBall(false);
+			return basicMapComponent();
+		case 'C':
+			createTrigBall();
+			return basicMapComponent();
+		default:
+			return basicMapComponent();
 		}
 	}
 
