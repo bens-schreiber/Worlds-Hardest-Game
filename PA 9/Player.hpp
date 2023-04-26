@@ -61,9 +61,9 @@ public:
 
 			if (m_transperency <= 0)
 			{
+				m_transperency = 1.0f;
 				resetPosition();
 				m_dead = false;
-				m_transperency = 1.0f;
 			}
 			resetMovement();
 		}
@@ -158,7 +158,12 @@ public:
 
 	// Bring the player back to the spawnpoint
 	void resetPosition() {
-		m_position = m_spawnpoint; }
+		m_position = m_spawnpoint; 
+
+		// Set the player rectangle position
+		m_rectangle.x = m_position.x;
+		m_rectangle.y = m_position.y;
+	}
 
 	void setSpawnPoint(Vector2 spawnpoint) {
 		m_position = spawnpoint;

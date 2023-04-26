@@ -25,10 +25,11 @@ class Game : public FrameListenable {
 
 	// Normal game levels
 	std::vector<std::string> m_gameLevels = {
+		"level5.whg",
 		"tutorial1.whg",
 		"tutorial2.whg",
 		"level1.whg",
-		"level2.whg"
+		"level2.whg",
 	};
 
 	// Test game levels

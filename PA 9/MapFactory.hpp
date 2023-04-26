@@ -72,7 +72,7 @@ class MapFactory  {
 		case 'T':
 		case '@':
 			// Spawn in the middle of the square
-			m_map.m_spawnpoint = {
+			map->m_spawnpoint = {
 				m_position.x + (playerDimensions) / 2,
 				m_position.y + (playerDimensions) / 2 
 			};
