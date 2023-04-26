@@ -29,11 +29,14 @@ class Game : public FrameListenable {
 	std::vector<std::string> m_gameLevels = {
 		"tutorial1.whg",
 		"tutorial2.whg",
+		"tutorial3.whg",
 		"level1.whg",
 		"level2.whg",
-		"level5.whg",
 		"level3.whg",
-		"level7.whg"
+		"level4.whg",
+		"level5.whg",
+		"level6.whg",
+		"level7.whg",
 	};
 
 	// Test game levels

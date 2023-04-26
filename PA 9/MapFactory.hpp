@@ -8,6 +8,7 @@
 #include "LinearBall.hpp"
 #include "Endzone.hpp"
 #include "TrigBall.hpp"
+#include "Coin.hpp"
 
 // Factory class dedicated to making Map objects
 class MapFactory  {
@@ -33,6 +34,11 @@ class MapFactory  {
 	// green square
 	MapComponent safeMapComponent() {
 		return { {m_position.x, m_position.y, mapComponentDimensions, mapComponentDimensions}, mapComponentSafeColor };
+	}
+
+	void createCoin() {
+		auto c = new Coin({ m_position.x + ballRadius + ballRadiusOutline, m_position.y + ballRadius + ballRadiusOutline });
+		m_frameListenables.push_back(c);
 	}
 
 	// Add the ball to the frame listenables and the entity collision list
@@ -114,6 +120,9 @@ class MapFactory  {
 			return basicMapComponent();
 		case 'H':
 			createTrigBall3();
+			return basicMapComponent();
+		case 'K':
+			createCoin();
 			return basicMapComponent();
 		default:
 			return basicMapComponent();

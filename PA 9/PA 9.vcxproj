@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
+    <ClCompile Include="Coin.cpp" />
     <ClCompile Include="GhostPlayers.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerDependency.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="AutomatedPlayer.hpp" />
     <ClInclude Include="client.hpp" />
+    <ClInclude Include="Coin.hpp" />
     <ClInclude Include="Endzone.hpp" />
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
@@ -157,7 +159,9 @@
     <None Include="level1.whg" />
     <None Include="level2.whg" />
     <None Include="level3.whg" />
+    <None Include="level4.whg" />
     <None Include="level5.whg" />
+    <None Include="level6.whg" />
     <None Include="level7.whg" />
     <None Include="README.md" />
     <None Include="test1.whgt" />
@@ -166,6 +170,7 @@
     <None Include="test4.whgt" />
     <None Include="test5.whgt" />
     <None Include="tutorial1.whg" />
+    <None Include="tutorial3.whg" />
     <None Include="tutorial2.whg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

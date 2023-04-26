@@ -39,11 +39,9 @@ public:
 	void handlePlayerCollision(Rectangle rect = {}) {
 
 		// If the ball and the player collide
-		if (CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
+		if (!player().isDead() && CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
 		{
-
 			player().killPlayer();
-
 		}
 
 	}

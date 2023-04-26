@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerCollidable.hpp"
-class Coin : public PlayerCollidable, public Entity {
+class Coin : public Entity, PlayerCollidable{
 	static int coinAmount;
 	bool m_transparent = false;
 public:
@@ -27,18 +27,23 @@ public:
 		DrawCircle(m_position.x, m_position.y, ballRadius - 7, ColorAlpha(YELLOW, m_transparent ? 0.0f : 1.0f));
 		
 	}
+
 	void handlePlayerCollision(Rectangle rect = {}) {
 
 		// If the ball and the player collide
-		if (!m_transparent && CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
+		if (!m_transparent && !player().isDead() && CheckCollisionCircleRec(m_position, ballRadius, player().getRectangle()))
 		{
 			m_transparent = true;
 			coinAmount--;
 		}
 	}
 
-
 	void update() {
+		if (player().isDead() && m_transparent) {
+			coinAmount++;
+			m_transparent = false;
+			return;
+		}
 		handlePlayerCollision();
 	}
 };

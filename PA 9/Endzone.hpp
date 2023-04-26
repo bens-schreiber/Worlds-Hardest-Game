@@ -1,5 +1,5 @@
 #pragma once
-#include <functional>
+#include "Coin.hpp"
 #include "PlayerCollidable.hpp"
 
 // Green endzone for the player to go to the next level on collision
@@ -17,7 +17,7 @@ public:
 	// Reset position in order to avoid spawning on the next endzone. This could still happen if the endzone is on the
 	// players old spawnpoint, so refrain from that level behavior
 	void handlePlayerCollision(Rectangle rect = {}) {
-		if (CheckCollisionRecs(player().getRectangle(), m_rect)) {
+		if (Coin::allCoinsCollected() && CheckCollisionRecs(player().getRectangle(), m_rect)) {
 			player().levelCompleted = true;
 			player().resetPosition();
 		}

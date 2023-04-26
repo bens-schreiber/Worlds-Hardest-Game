@@ -178,13 +178,16 @@ public:
 		return m_deaths;
 	}
 
+	bool isDead() const {
+		return m_dead;
+	}
 	
 
 	void incrementLevel() {
 		m_level++;
 	}
 
-	int getLevel() {
+	int getLevel() const {
 		return m_level;
 	}
 
