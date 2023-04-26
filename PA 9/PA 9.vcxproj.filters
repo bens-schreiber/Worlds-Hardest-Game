@@ -104,6 +104,9 @@
     <ClInclude Include="GhostPlayers.hpp">
       <Filter>Header Files\FrameListenables\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="TrigBall.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
@@ -135,6 +138,15 @@
     </None>
     <None Include="test5.whgt">
       <Filter>Header Files\Resource Files\tests</Filter>
+    </None>
+    <None Include="level3.whg">
+      <Filter>Header Files\Resource Files\level</Filter>
+    </None>
+    <None Include="level5.whg">
+      <Filter>Header Files\Resource Files\level</Filter>
+    </None>
+    <None Include="level7.whg">
+      <Filter>Header Files\Resource Files\level</Filter>
     </None>
   </ItemGroup>
 </Project>
