@@ -7,7 +7,7 @@
 #include "Map.hpp"
 #include "LinearBall.hpp"
 #include "Endzone.hpp"
-#include "TrigBall.h"
+#include "TrigBall.hpp"
 
 // Factory class dedicated to making Map objects
 class MapFactory  {

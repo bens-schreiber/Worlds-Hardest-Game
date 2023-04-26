@@ -29,9 +29,9 @@ public:
 		DrawCircle(m_position.x, m_position.y, ballRadius - 7, DARKBLUE);
 	}
 	void update() {
-	m_position.x = m_x + m_circleRadius * (float)cos(m_circleSpeed * GetTime() * PI);
-	m_position.y = m_y + m_circleRadius * (float)sin(m_circleSpeed * GetTime() * PI);
-	handlePlayerCollision();
+		m_position.x = m_x + m_circleRadius * (float)cos(m_circleSpeed * GetTime() * PI);
+		m_position.y = m_y + m_circleRadius * (float)sin(m_circleSpeed * GetTime() * PI);
+		handlePlayerCollision();
 	}
 	void handlePlayerCollision(Rectangle rect = {}) {
 

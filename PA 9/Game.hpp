@@ -25,11 +25,13 @@ class Game : public FrameListenable {
 
 	// Normal game levels
 	std::vector<std::string> m_gameLevels = {
-		"level5.whg",
 		"tutorial1.whg",
 		"tutorial2.whg",
 		"level1.whg",
 		"level2.whg",
+		"level5.whg",
+		"level3.whg",
+		"level7.whg"
 	};
 
 	// Test game levels
@@ -38,7 +40,7 @@ class Game : public FrameListenable {
 		"test2.whgt",
 		"test3.whgt",
 		"test4.whgt",
-		"test5.whgt",
+		"test5.whgt"
 	};
 
 	// Thread for running tests
