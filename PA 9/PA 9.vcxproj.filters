@@ -115,9 +115,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md">
-      <Filter>Header Files\Resource Files</Filter>
-    </None>
     <None Include="tutorial1.whg">
       <Filter>Header Files\Resource Files\tutorial</Filter>
     </None>
@@ -163,5 +160,6 @@
     <None Include="tutorial3.whg">
       <Filter>Header Files\Resource Files\tutorial</Filter>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

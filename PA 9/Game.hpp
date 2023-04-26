@@ -30,13 +30,13 @@ class Game : public FrameListenable {
 		"tutorial1.whg",
 		"tutorial2.whg",
 		"tutorial3.whg",
-		"level1.whg",
-		"level2.whg",
-		"level3.whg",
-		"level4.whg",
-		"level5.whg",
-		"level6.whg",
-		"level7.whg",
+		//"level1.whg",
+		//"level2.whg",
+		//"level3.whg",
+		//"level4.whg",
+		//"level5.whg",
+		//"level6.whg",
+		//"level7.whg",
 	};
 
 	// Test game levels
@@ -93,9 +93,10 @@ public:
 		m_levels = m_testLevels;
 
 		// Set the player dependency to an automated player
-		delete m_player;
 		m_player = new AutomatedPlayer();
 		PlayerDependency::setPlayer(m_player);
+
+		m_staticFrameListenables = { m_player };
 
 		// Grab the first map
 		m_map = MapFactory(m_frameListenables).mapFromFile(m_testLevels[0]);
@@ -134,12 +135,11 @@ public:
 	// Go to the next level of the map
 	void nextLevel() {
 
+		// goto next level
 		m_player->incrementLevel();
 
-		// end game
-		if (m_player->getLevel() > m_levels.size() - 1) {
-			exit(1);
-		}
+		// game level loop
+		m_player->setLevel(m_player->getLevel() % m_levels.size());
 
 		// Reset the level completed checker
 		m_player->levelCompleted = false;

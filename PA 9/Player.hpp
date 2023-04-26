@@ -170,6 +170,10 @@ public:
 		m_spawnpoint = spawnpoint;
 	}
 
+	void setLevel(int level) {
+		m_level = level;
+	}
+
 	const Rectangle& getRectangle() const {
 		return m_rectangle;
 	}
