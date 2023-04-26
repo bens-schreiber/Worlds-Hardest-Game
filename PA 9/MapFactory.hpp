@@ -7,6 +7,7 @@
 #include "Map.hpp"
 #include "LinearBall.hpp"
 #include "Endzone.hpp"
+#include "TrigBall.h"
 
 // Factory class dedicated to making Map objects
 class MapFactory  {
@@ -58,6 +59,12 @@ class MapFactory  {
 		m_frameListenables.push_back(b);
 	}
 
+	void createTrigBall() {
+		auto b = new TrigBall(
+			{ m_position.x + ballRadius + ballRadiusOutline,  m_position.y + ballRadius + ballRadiusOutline}, 100, 0.5);
+		m_frameListenables.push_back(b);
+	}
+
 	// Switch based off the char given
 	MapComponent createMapComponent(const char& i) {
 		switch (i) {
@@ -89,6 +96,9 @@ class MapFactory  {
 			return basicMapComponent();
 		case 'D':
 			createYBall(false);
+			return basicMapComponent();
+		case 'C':
+			createTrigBall();
 			return basicMapComponent();
 		default:
 			return basicMapComponent();

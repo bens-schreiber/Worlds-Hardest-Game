@@ -6,7 +6,7 @@
 #include <time.h>
 #include <math.h>
 
-// Ball capable of moving linearly along the X or Y
+// Ball capable of moving in circle
 class TrigBall : public Entity, public MapCollidable, PlayerCollidable
 {
 
@@ -16,13 +16,9 @@ class TrigBall : public Entity, public MapCollidable, PlayerCollidable
 public:
 
 	TrigBall(Vector2 position,
-		Vector2 velocity, 
-		int circleRadius,
-		int circleSpeed)  // size of area you want to circle
-		: Entity(position, velocity) {
-		this->m_circleRadius = circleRadius;
-		this->m_cirlceSpeed = circleSpeed;
-	};
+		float circleRadius, // size of area you want to circle
+		float circleSpeed)  // speed of ball
+		: Entity(position), m_circleRadius(circleRadius), m_circleSpeed(circleSpeed), m_x(position.x), m_y(position.y) {}
 
 	void draw() {
 
@@ -33,9 +29,9 @@ public:
 		DrawCircle(m_position.x, m_position.y, ballRadius - 7, DARKBLUE);
 	}
 	void update() {
-		m_position.x = m_position.x + m_circleRadius * (float)cos(m_cirlceSpeed * GetTime() * PI);
-		m_position.y = m_position.y + m_circleRadius * (float)cos(m_cirlceSpeed * GetTime() * PI);
-		handlePlayerCollision();
+	m_position.x = m_x + m_circleRadius * (float)cos(m_circleSpeed * GetTime() * PI);
+	m_position.y = m_y + m_circleRadius * (float)sin(m_circleSpeed * GetTime() * PI);
+	handlePlayerCollision();
 	}
 	void handlePlayerCollision(Rectangle rect = {}) {
 
@@ -51,12 +47,13 @@ public:
 		return CheckCollisionCircleRec({ m_position.x, m_position.y }, 0, rect);
 	}
 
-private:
-	int m_circleRadius; // size of area you want to circle
-	int m_cirlceSpeed; // somewhere around 0.05 is reasonable
+	void handleMapOutOfBounds() {
 
-	/*void handleMapOutOfBounds() {
-		flipVelocityX();
-		flipVelocityY();
-	}*/
+	}
+
+private:
+	float m_circleRadius; // size of area you want to circle
+	float m_circleSpeed; // somewhere around 0.5 is reasonable
+	float m_x;
+	float m_y;
 };
