@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerDependency.cpp" />
+    <ClCompile Include="Application.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutomatedPlayer.hpp" />
@@ -136,12 +137,14 @@
     <ClInclude Include="FrameListenable.hpp" />
     <ClInclude Include="consts.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Application.h" />
     <ClInclude Include="Interface.hpp" />
     <ClInclude Include="LinearBall.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="MapCollidable.hpp" />
     <ClInclude Include="MapFactory.hpp" />
+    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerCollidable.hpp" />
     <ClInclude Include="PlayerDependency.hpp" />

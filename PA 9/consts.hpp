@@ -31,3 +31,8 @@
 
 // tests
 #define testDuration 3
+
+// menu
+#define menuTitleFontSize 140
+#define menuChoiceFontSize 70
+#define numChoices 3
