@@ -1,9 +1,10 @@
 import socket
 import threading
+import os
 
 # Define server host and port
-HOST = '10.217.45.170'
-PORT = 8080
+HOST = os.environ("HOST", "127.0.0.1")
+PORT = os.environ("PORT", "8080")
 
 # Define a dictionary to store level names -> client -> coordinates
 # TODO: NOSQL database
