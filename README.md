@@ -1,4 +1,6 @@
 # WORLDS HARDEST GAME (WSU CPTS 122 PA 9)
+DEVELOPERS: Benjamin Schreiber, Kendall Lyons, Andrew Mcgann, Andrew Varkey
+
 Created as a class project. Takes inspiration from a browser game by the same name, but uses its own levels and adds in networking.
 Utilizes the C raylib rendering library.
 In essence, it is a game engine that takes in WHG files and turns them into playable levels.

@@ -3,7 +3,7 @@ import threading
 import os
 
 # Define server host and port
-HOST = os.environ.get("HOST", "127.0.0.1")
+HOST = os.environ.get("HOST", "10.217.45.170")
 PORT = int(os.environ.get("PORT", "8080"))
 
 # Define a dictionary to store level names -> client -> coordinates
@@ -81,6 +81,11 @@ def handle_client_connection(client_socket, client_addr) -> None:
             # Delete the client's coordinates from dictionary if port matches
             prune_client(client_addr)
             break
+        except:
+            client_socket.send("N".encode('utf-8'))
+            client_socket.close()
+            break
+
 
 
 # Create a socket object
