@@ -30,13 +30,13 @@ class Game : public FrameListenable {
 		"tutorial1.whg",
 		"tutorial2.whg",
 		"tutorial3.whg",
-		//"level1.whg",
-		//"level2.whg",
-		//"level3.whg",
-		//"level4.whg",
-		//"level5.whg",
-		//"level6.whg",
-		//"level7.whg",
+		"level1.whg",
+		"level2.whg",
+		"level3.whg",
+		"level4.whg",
+		"level5.whg",
+		"level6.whg",
+		"level7.whg",
 	};
 
 	// Test game levels
