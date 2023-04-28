@@ -49,11 +49,13 @@ def handle_client_connection(client_socket, client_addr) -> None:
 
             # Receive data from the client
             data = client_socket.recv(1024).decode('utf-8')
+            f = open("log.txt", "rw")
+            f.write(data)
 
             # Break this connection if the client disconnects
             if (handle_client_disconnect(data, client_addr)):
-
                 break
+
             # Data comes in the form level (int), x (float), y (float)
             # Extract level name and coordinates from data
             level, x, y = map(float, data.split(','))
