@@ -9,8 +9,8 @@
 #pragma comment(lib, "ws2_32.lib")
 #pragma warning(disable:4996)
 #define BUFFER_SIZE 1024
-#define SERVER_ADDRESS "127.0.0.1"
-#define PORT_NUMBER 80
+#define SERVER_ADDRESS "whg-server.azurewebsites.net"
+#define PORT_NUMBER 8080
 #define RETRY_CONN_WAIT 5	// (in seconds)
 
 // DISCLAIMER:

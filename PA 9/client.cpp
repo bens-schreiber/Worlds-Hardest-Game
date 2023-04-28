@@ -1,5 +1,6 @@
 #include "client.hpp"
 #include <WinSock2.h>
+#include <ws2tcpip.h>
 #include <thread>
 
 SocketClient::SocketClient() : clientSocket(INVALID_SOCKET), clientThread() {}
@@ -14,42 +15,56 @@ void SocketClient::stopClient() {
 
 void SocketClient::clientThreadFunc() {
     while (!killServer) {
+        runClientServer();
         std::this_thread::sleep_for(std::chrono::seconds(RETRY_CONN_WAIT));
         std::cout << "Retrying connection to server...\n";
-        runClientServer();
     }
 }
 
 void SocketClient::runClientServer() {
     {
         WSADATA wsaData;
+        if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+            fprintf(stderr, "WSAStartup failed.\n");
+            return;
+        }
 
-        // Server didn't start
-        if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) return;
+        struct addrinfo hints = { 0 };
+        hints.ai_family = AF_INET; // use IPv4
+        hints.ai_socktype = SOCK_STREAM; // use TCP
+        hints.ai_protocol = IPPROTO_TCP; // use TCP
 
-        clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+        struct addrinfo* result = NULL;
+        int status = getaddrinfo(SERVER_ADDRESS, "http", &hints, &result);
+        if (status != 0) {
+            fprintf(stderr, "getaddrinfo failed: %d\n", status);
+            WSACleanup();
+            return;
+        }
 
-        // Failed to initialize socket
+        SOCKET clientSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
         if (clientSocket == INVALID_SOCKET) {
+            fprintf(stderr, "socket failed: %d\n", WSAGetLastError());
+            freeaddrinfo(result);
             WSACleanup();
             return;
         }
 
-        struct sockaddr_in serverAddr;
-        serverAddr.sin_family = AF_INET;
-        serverAddr.sin_port = htons(PORT_NUMBER);
-        serverAddr.sin_addr.s_addr = inet_addr(SERVER_ADDRESS);
-
-        // Failed to connect
-        if (connect(clientSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
+        if (connect(clientSocket, result->ai_addr, (int)result->ai_addrlen) == SOCKET_ERROR) {
+            fprintf(stderr, "connect failed: %d\n", WSAGetLastError());
             closesocket(clientSocket);
+            freeaddrinfo(result);
             WSACleanup();
             return;
         }
 
+        // For recieving info
         char buffer[BUFFER_SIZE];
+
+        // For sending info
         std::stringstream ss;
 
+        // Log connection
         std::cout << "Connection established to " << SERVER_ADDRESS << ":" << PORT_NUMBER << std::endl;
 
         while (1) {
