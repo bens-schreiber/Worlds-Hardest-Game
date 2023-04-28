@@ -50,6 +50,11 @@ def handle_client_connection(client_socket, client_addr) -> None:
             # Receive data from the client
             data = client_socket.recv(1024).decode('utf-8')
 
+            # Data from the game will come in a very specific request. Expect it to arrive with this header
+            # GET / HTTP/1.1\r\nHost: whg-server.azurewebsites.net\r\n\r\n
+            # Get rid of this header
+            data = data[:len("GET / HTTP/1.1\r\nHost: whg-server.azurewebsites.net\r\n\r\n")]
+
             # Break this connection if the client disconnects
             if (handle_client_disconnect(data, client_addr)):
                 break
