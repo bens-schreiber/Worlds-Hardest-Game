@@ -89,7 +89,7 @@ def handle_client_connection(client_socket, client_addr) -> None:
                 # Return an N if there is nothing in the level. Why N? Why not
                 response = "N"
             # Send the response back to the client as a comma-separated list
-            client_socket.send(response.encode('utf-8'))
+            client_socket.send(f"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n{response}".encode('utf-8'))
 
         except socket.error as e:
 
