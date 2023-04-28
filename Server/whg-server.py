@@ -51,9 +51,8 @@ def handle_client_connection(client_socket, client_addr) -> None:
             data = client_socket.recv(1024).decode('utf-8')
 
             # Data from the game will come in a very specific request. Expect it to arrive with this header
-            # GET / HTTP/1.1\r\nHost: whg-server.azurewebsites.net\r\n\r\n
-            # Get rid of this header
-            data = data[:len("GET / HTTP/1.1\r\nHost: whg-server.azurewebsites.net\r\n\r\n")]
+            # Get rid of everything before this delimiter. Our data is after it.
+            data = data.split("\r\n\r\n")[1]
 
             # Break this connection if the client disconnects
             if (handle_client_disconnect(data, client_addr)):
@@ -89,7 +88,7 @@ def handle_client_connection(client_socket, client_addr) -> None:
                 # Return an N if there is nothing in the level. Why N? Why not
                 response = "N"
             # Send the response back to the client as a comma-separated list
-            client_socket.send(f"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n{response}".encode('utf-8'))
+            client_socket.send(response.encode('utf-8'))
 
         except socket.error as e:
 
