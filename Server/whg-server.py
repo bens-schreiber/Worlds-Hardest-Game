@@ -49,8 +49,6 @@ def handle_client_connection(client_socket, client_addr) -> None:
 
             # Receive data from the client
             data = client_socket.recv(1024).decode('utf-8')
-            f = open("log.txt", "w")
-            f.write(data)
 
             # Break this connection if the client disconnects
             if (handle_client_disconnect(data, client_addr)):
@@ -119,7 +117,6 @@ def handle_client_connection(client_socket, client_addr) -> None:
                 "</body>\r\n"
                 "</html>\r\n"
                 .encode('utf-8')
-
             )
 
             client_socket.close()
